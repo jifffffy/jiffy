@@ -3,4 +3,5 @@
 .sass-cache
 Gemfile.lock
 .idea/
+_site/
 
