@@ -1,0 +1,4 @@
+[submodule "_site"]
+	path = _site
+	url = https://github.com/sunyuyangg555/sunyuyangg555.github.io.git
+	branch = master
