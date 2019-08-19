@@ -1,0 +1,6 @@
+<div class="hottag">
+    <h2>标签<a title="标签库" href="{{ site.baseurl }}/tags_all.html">更多&gt;&gt;</a></h2>
+    {% for tag in site.tags |limit:10 %} {% capture tag_name %}{{ tag | first }}{% endcapture %}
+    <a href="{{ site.baseurl }}/blog/tags/{{ tag_name }}" class="t{{ forloop.index }}">{{ tag_name | slugize }}</a>
+    {% endfor %}
+</div>

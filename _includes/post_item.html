@@ -1,0 +1,21 @@
+<li>
+    <a  title="{{ post.author }}" href="" class="artuser">
+        <img alt="隐式等待" src="/assets/images/users/{{ post.avatar }}"/>
+        <span><font class="username">{{ post.author }}</font><font class="date">{{ post.date | date_to_string }}</font></span>
+    </a>
+    <div class="artinfo">
+        <a title="{{ post.title }}" href="{{ post.url }}"  class="artimg">
+            <img alt="{{ post.title }}" src="/assets/images/{{ post.image }}">
+        </a>
+        <a title="{{ post.title }}" href="{{ post.url }}"  class="arttitle">
+            <h2 title="{{ post.title }}">{{ post.title }}</h2>
+        </a>
+        <a class="artdes" href="{{ post.url }}" ><p>{{ post.excerpt }}</p></a>
+    </div>
+    <div class="artlike">
+        <span title="点赞:4" class="like">4</span>
+        <span title="倒赞:0" class="dislike">0</span>
+        <span title="收藏:0" class="favorite">0</span>
+        <a href="" title="评论:0" class="reply">0</a>
+    </div>
+</li>

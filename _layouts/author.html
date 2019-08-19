@@ -1,0 +1,9 @@
+---
+layout: default
+---
+<ul class="artlist hotsearch">
+  {% assign filtered_posts = site.posts | where: 'author', page.name %}
+  {% for post in filtered_posts %}
+  {% include post_item.html %}
+  {% endfor %}
+</ul>

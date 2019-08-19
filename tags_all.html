@@ -1,0 +1,15 @@
+---
+---
+<div class="hotsearch">
+    <div class="searchhottag">
+        <div class="hottagcon">
+            <h3>所有标签</h3>
+            <div class="tagsdiv">
+                {% for tag in site.tags %} {% capture tag_name %}{{ tag | first }}{% endcapture %}
+                <a href="{{ site.baseurl }}/blog/tags/{{ tag_name }}">{{ tag_name | slugize
+                    }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

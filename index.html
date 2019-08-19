@@ -1,0 +1,15 @@
+---
+pagination:
+  enabled: true
+---
+
+<!--文章列表-->
+<div class="art">
+    <ul class="artlist">
+        {% for post in paginator.posts %}
+        {% include post_item.html %}
+        {% endfor %}
+    </ul>
+    {% include paginator.html %}
+</div>
+

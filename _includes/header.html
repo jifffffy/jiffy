@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <title>{{ page.title }}</title>
+    {% if page.url == "/404.html" %}
+    <meta http-equiv="refresh" content="5; url=/">
+    {% endif %}
+
+    {% feed_meta %}
+    {% seo %}
+
+    <meta name="Keywords" content="">
+    <link href="/assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="author" content="Your name goes here">
+    <meta name="copyright" content="Maybe consider a Creative Commons license">
+
+    <link rel="stylesheet" href="/assets/css/foundation.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/css/coderay.css">
+    <link rel="stylesheet" href="/assets/css/asciidoctor.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link href="/assets/css/R.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/layer.css" id="layui_layer_skinlayercss" style="">
+
+</head>
+<body id="mescroll" class="mescroll">
+<div class="c pink">
+    <div class="con head">
+        <a title="" href="" class="logo">
+            <img alt="Logo" class="pclogo" src="/assets/images/Logo.png">
+            <img alt="Logo" class="mobilelogo hide" src="/assets/images/mobile_logo.png">
+        </a>
+
+        <span class="menuebtn"></span>
+    </div>
+</div>

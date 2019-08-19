@@ -1,0 +1,26 @@
+:page-title: This a adoc
+:page-author: Sujay Kundu
+:page-avatar: devlopr.png
+:page-image: diagram.png
+:page-category: guides
+:page-tags: [ typescript, golang, spring]
+:page-excerpt: This page shows diagrams being used in a regular page.
+[ditaa,diagram,png]
+....
+                   +-------------+
+                   | Asciidoctor |-------+
+                   |   diagram   |       |
+                   +-------------+       | PNG out
+                       ^                 |
+                       | ditaa in        |
+                       |                 v
+ +--------+   +--------+----+    /---------------\
+ |        | --+ Asciidoctor +--> |               |
+ |  Text  |   +-------------+    |   Beautiful   |
+ |Document|   |   !magic!   |    |    Output     |
+ |     {d}|   |             |    |               |
+ +---+----+   +-------------+    \---------------/
+     :                                   ^
+     |          Lots of work             |
+     +-----------------------------------+
+....

@@ -1,0 +1,21 @@
+= Diagram in a Post
+:page-layout: post
+:page-author: Sujay Kundu
+:page-avatar: devlopr.png
+:page-categories: [jekyll, asciidoc]
+:page-image: cyclic.svg
+:page-excerpt: This page shows diagrams being used in a post.
+
+[graphviz,cyclic,svg]
+....
+digraph g {
+    a -> b
+    b -> c
+    c -> d
+    d -> a
+}
+....
+
+Powered by:
+
+image::logo-2x.png[Jekyll]

@@ -1,0 +1,17 @@
+<div class="hotuser">
+    <h2>作者</h2>
+    <ul>
+        {% for author in site.authors limit:12 %}
+        <li>
+            <a  href="{{ author.url}}" title="{{ author.title }}">
+                <img alt="{{ author.title }}" src="/assets/images/users/{{ author.avatar }}">
+                <span>
+                    <font class="username">{{ author.name }}</font>
+                    <font class="userdes">{{ author.summary }}</font>
+                </span>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+

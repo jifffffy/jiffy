@@ -1,0 +1,24 @@
+---
+layout: default
+---
+<div class="detailcontent">
+    <div class="detail">
+        <div class="detailcon">
+            <a title="{{ page.title }}" href="" class="detailuser">
+                <img alt="{{ page.title }}" src="/assets/images/users/{{ page.avatar }}">
+                <span>
+                    <font class="username">{{ page.author }}</font>
+                    <font class="date">{{ page.date | date_to_string }}</font>
+                </span>
+            </a>
+            <div class="arttag">
+                {% for tag in page.tags %}
+                <a  title="{{ tag }}" href="{{ site.baseurl }}/blog/tags/{{ tag }}" class="t{{ forloop.index }}">{{ tag }}</a>
+                {% endfor %}
+            </div>
+            <div class="detailinfo aligncenter">
+                {{ content }}
+            </div>
+        </div>
+    </div>
+</div>

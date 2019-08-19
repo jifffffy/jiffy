@@ -1,0 +1,75 @@
+title: Jekyll AsciiDoc Blog
+description: The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on GitHub with content based in AsciiDoc.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - Rakefile
+
+keep_files:
+  - images
+asciidoc: {}
+asciidoctor:
+  base_dir: :docdir
+  safe: unsafe
+  attributes:
+    - idseparator=_
+    - source-highlighter=coderay
+    - icons=font
+    - imagesdir=/assets/images
+    - imagesoutdir=../assets/images
+
+
+
+baseurl: ''
+
+# pagination of posts
+paginate: 8
+per_page: 4
+paginate_path: "/page/:num/"
+
+# syntax highlighter
+markdown: kramdown
+
+urls:
+  - text: Blog
+    url: /
+
+collections:
+  authors:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: "authors"
+    values:
+      layout: "author"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "page"
+
+
+
+# minify
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
+  endings: all
+  ignore:
+    envs: ['development']
+
+
+plugins:
+  - jekyll-plantuml
+  - asciidoctor-diagram
+  - jekyll-asciidoc
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate

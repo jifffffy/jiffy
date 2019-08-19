@@ -1,0 +1,30 @@
+:page-title: This a adoc
+:page-author: Sujay Kundu
+:page-avatar: devlopr.png
+:page-image: sample-component-plantuml-diagram.png
+:page-category: guides
+:page-tags: [ typescript, golang, spring]
+:page-excerpt: This page shows diagrams being used in a regular page.
+
+[plantuml, sample-component-plantuml-diagram, alt="Component diagram", width=135, height=118,png]
+----
+[AA] <<static lib>>
+[BB] <<shared lib>>
+[CC] <<static lib>>
+
+node node1
+node node2 <<shared node>>
+database Production
+
+skinparam component {
+	backgroundColor<<static lib>> DarkKhaki
+	backgroundColor<<shared lib>> Green
+}
+
+skinparam node {
+	borderColor Green
+	backgroundColor Yellow
+	backgroundColor<<shared node>> Magenta
+}
+skinparam databaseBackgroundColor Aqua
+----
