@@ -1,5 +1,6 @@
 <li>
-    <a  title="{{ post.author }}" href="" class="artuser">
+    {% assign authors = site.authors |  where: 'name', post.author  %}
+    <a  title="{{ post.author }}" href="{{ authors.first.url }}" class="artuser">
         <img alt="隐式等待" src="/assets/images/users/{{ post.avatar }}"/>
         <span><font class="username">{{ post.author }}</font><font class="date">{{ post.date | date_to_string }}</font></span>
     </a>

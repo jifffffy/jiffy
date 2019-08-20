@@ -4,7 +4,8 @@ layout: default
 <div class="detailcontent">
     <div class="detail">
         <div class="detailcon">
-            <a title="{{ page.title }}" href="" class="detailuser">
+            {% assign authors = site.authors |  where: 'name', page.author  %}
+            <a title="{{ page.title }}" href="{{ authors.first.url}}" class="detailuser">
                 <img alt="{{ page.title }}" src="/assets/images/users/{{ page.avatar }}">
                 <span>
                     <font class="username">{{ page.author }}</font>
