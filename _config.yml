@@ -19,7 +19,10 @@ asciidoctor:
     - imagesoutdir=../assets/images
 
 
-
+comment_gitalk_clientId: e6a309ad3bd8766be265
+comment_gitalk_clientSecret: 00c1c086d60c9e31d0276f688dde7717d5f79a24
+comment_gitalk_repo: sunyuyangg555.github.io
+github_username: sunyuyangg555
 baseurl: ''
 
 # syntax highlighter
