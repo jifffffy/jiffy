@@ -1,0 +1,879 @@
+:page-title: Sleep
+:page-author: Sunyuyangg555
+:page-avatar: devlopr.png
+:page-image: sleep.png
+:page-category: guides
+:page-tags: [ java, sleep]
+:page-excerpt: Sleep is a Java-based scripting language heavily inspired by Perl. Sleep started out as a weekend long hack fest in April 2002. When nothing like Perl was available to build a scriptable Internet Relay Chat client, I set out to build the scripting language I wanted.
+
+= Tutorial
+
+== Introduction
+
+=== I. What is Sleep?
+The java world currently has Jacl for TCL, Jython for Python, and JRuby for Ruby. One offering is missing from this bunch: what Java scripting language exists for the Perl hackers of the world?
+
+Sleep is a Java-based scripting language heavily inspired by Perl. Sleep started out as a weekend long hack fest in April 2002. When nothing like Perl was available to build a scriptable Internet Relay Chat client, I set out to build the scripting language I wanted.
+
+image::/assets/images/jirciiWIN.jpg[]
+
+Go ahead and download jIRCii to see what Sleep can do. http://jircii.dashnine.org/
+
+Sleep has evolved beyond its beginnings as a scripting engine for a chat program. Today Sleep primitives include strings, doubles, integers, and containers for holding objects and functions. Arrays and hashes can combine these primitives into complex data structures. Closures that respond to "messages" act as a flexible means of abstraction. Also The entire Java API is accessible as if the Java Objects were functions that respond to "messages".
+
+==== Sleep Website
+
+It is about 11:30pm on a Friday night and I would love to know where I can get some sleep. All puns aside, the latest version of Sleep is always available at the Sleep homepage:
+http://sleep.dashnine.org/
+
+You will find documentation, script examples, articles, and extensions at the Sleep homepage.
+
+==== How to receive support
+
+Most sleep discussion takes place on a google group. Through this group you can see what is on the horizon with Sleep and comment on open ideas. This is also a great place to report bugs and receive support.
+
+http://groups.google.com/group/sleep-developers/
+
+If you prefer to chat with a living person, you may find me and some Sleep hackers on internet relay chat (IRC). We are in the #jIRCii channel on the EFNet IRC network. A list of EFNet servers is available at http://www.efnet.org/
+
+==== Sleep Snippets Blog
+
+O'Reilly and Associates has a successful series of books on technology hacks. These books consist of about 100 stand-alone tips and code snippets around a core subject. In this spirit Sleep has the Sleep Snippets Weblog. Each new snipppet (with explanation) shows off cool Sleep capabilities.
+http://jroller.com/page/sleepsnip
+
+=== II. Manual Conventions
+
+This manual consists of two sections. The first section is a tutorial on the Sleep language. This section is small on purpose. Read it to get a good grounding in the terminology, idioms, and features of the Sleep language. The second section is a man-page style reference on the standard Sleep library. This reference includes descriptions of each parameter, example code, and related topics.
+The following conventions exist throughout this manual.
+A monospaced font signals source code.
+
+``
+println("hello world");
+``
+
+Italicized text refers to variable names.
+
+----
+$variable, @array, %hash.
+----
+This guide displays function names in a monospaced font.
+
+``&foo``
+
+Examples will occasionally show input or user originated commands. A strong typeface marks this.
+
+----
+java -jar sleep.jar
+----
+
+Program output is below:
+
+----
+I am some output
+----
+
+This manual also highlights frequently asked questions.
+
+WARNING: What are these boxes?
+This is a frequently asked questions box.
+These point out questions folks have asked in the past.
+
+=== III. Acknowledgements
+
+I'll keep this list short and sweet. I just want to quickly acknowledge some of the folks whose input has shaped Sleep. I'm still doing this project for the fun of it but its good to know these guys are out there. I'd like to thank Andreas Ravnestad for his work on Slumber. Andreas and Serge Baranov both deserve thanks for their contributions to jIRCii in the past. The jIRCii community put up with a very rough scripting language a few years ago. To that end I owe a thanks to Dan "phos" Fare, mexis, T.J "ceelow" Smith, tijiez, neuken, [rza], blue-elf, drakx, and all the others who put their creativity and enthusiasm into writing Sleep scripts for jIRCii. Thanks for finding the issues so others don't have to. I'd also like to thank Kurt von Finck (mneptok) for his support and advocacy. Marty Sheppard deserves mad greets. He is one of the drivers throwing Sleep at real projects. His work and input has had quite an influence on Sleep. I also want to say thanks to skape, shane, ratdog, brian, and the rest of the hick.org crew. Hick hosted the Sleep and jIRCii sites for the first several years of their existence. Thanks to Brandon Mumby for providing me a place to run my experimental Sleep webserver. This "experimental" server is currently hosting the jIRCii and Sleep websites. Also I'll thank those of you who come out of nowhere emailing me oddball questions about Sleep in weird contexts. Thanks for keeping me amused.
+
+== 1. Getting Started
+
+=== 1.1 Stand-alone Scripts
+
+Sleep scripts run stand-alone from the command line using sleep.jar as the interpreter.
+
+The traditional first script is usually the famous Hello World program. As I am a fan of tradition your first Sleep script will be a Hello World script as well.
+
+To run the following script: type the source code into a text editor, save it as hello.sl, and then run it by typing:
+
+**java -jar sleep.jar hello.sl**
+
+``println("Hello World");``
+----
+Hello World
+----
+Congratulations! You have written and ran your first Sleep script.
+
+==== Command Line Arguments
+
+Scripts run from the command line can receive arguments. Sleep stores arguments in the variable @ARGV. For example the following sleep script copies files. The source file is @ARGV[0] and the destination file is @ARGV[1].
+
+----
+# cp.sl [original file] [new file]
+$in = openf(@ARGV[0]);
+$data = readb($in, -1);
+$out = openf(">" . @ARGV[1]);
+writeb($out, $data); closef($in);
+closef($out);
+----
+----
+$ java -jar sleep.jar cp.sl hello.sl hello.bak
+$ cat hello.bak
+----
+----
+println("Hello World");
+----
+
+The **$\\__SCRIPT__** variable contains the name of the current script.
+
+==== Command Line Options
+
+Sleep accepts many command line arguments.
+
+----
+$ java -jar sleep.jar --help
+Sleep 2.1 (20080515) Usage: java [properties] -jar sleep.jar [options] [-|file|expression]
+properties:
+    -Dsleep.assert=<true|false>
+    -Dsleep.classpath=<path to locate 3rd party jars from>
+    -Dsleep.debug=<debug level>
+    -Dsleep.taint=<true|false>
+options:
+    -a --ast display the abstract syntax tree of the specified script
+    -c --check check the syntax of the specified file
+    -e --eval evaluate a script as specified on command line
+    -h --help display this help message
+    -p --profile collect and display runtime profile statistics
+    -t --time display total script runtime
+    -v --version display version information
+    -x --expr evaluate an expression as specified on the command line file: specify a '-' to read script from STDIN
+----
+
+Java passes the **[properties]** directly to Sleep. These properties are available from the **&systemProperties** function.
+The sleep.assert property enables or disables assertions. This manual discusses assertions in 3.4 Assertions.
+
+The sleep.classpath property specifies where Sleep should look for 3rd party jar files loaded with import [path] from: [jar file] and &use. Use a semicolon or colon between entries to specify more than one path. Chapter 7.1 Object Expressions: 3rd-party Jars discusses the import from ability in detail.
+
+The sleep.debug property specifies the debug level to run the script with. This manual sprinkles script debugging topics throughout its pages.
+
+The sleep.taint property enables or disables taint mode. When enabled, taint mode marks all data from external sources as tainted. Some Sleep functions do not accept tainted data. 6.1 Object Expressions: Taint Mode and Objects and 9.3 Sleep Integration: Taint Mode discuss this security feature in detail.
+
+The Sleep console runs when there is no script file.
+----
+Can I start Sleep scripts with jrunscript?
+
+Java 1.6 includes a new programming interface to allow interchangeable use of different script engines. Sleep 2.1 supports this interface and yes you can launch Sleep scripts with jrunscript. Make sure sleep.jar is in your classpath for the following to work:
+
+$ jrunscript -l sleep -f hello.sl
+
+@ARGV and $__SCRIPT__ are available to scripts run through jrunscript.
+
+----
+=== 1.2 The Sleep Console
+The Sleep console is an environment that runs Sleep code interactively. You will know you are in the Sleep console when you see the following:
+----
+$ java -jar sleep.jar
+>> Welcome to the Sleep scripting language
+>
+----
+==== Help within the Console
+The **help** command is available for getting help. Simply type help command name to receive information about a command. The help command by itself simply lists the available commands.
+
+==== Evaluate an Expression
+
+
+To evaluate an expression using the Sleep console use the **x** command.
+----
+> x 3 + 4
+7
+> x split(" ", "Hello World")
+@('Hello', 'World')
+> x [Math PI]
+3.141592653589793
+----
+To evaluate a predicate expression (an if condition) use the **?** command.
+----
+> ? 3 eq "3"
+true
+> ? 3 eq 3.0
+false
+> ? (3 == 3) && ($x is $null || 3 == 4)
+true
+----
+==== Interact Mode
+
+
+You can type any amount of Sleep code with interactive mode. Launch interactive mode with the **interact** command. Place a period on a line by itself once the code is ready for evaluation.
+----
+> interact
+>> Welcome to interactive mode.
+Type your code and then '.' on a line by itself to execute the code.
+Type Ctrl+D or 'done' on a line by itself to leave interactive mode.
+println("Hello World");
+.
+Hello World
+$x = 4 * atan2(1, 1);
+println($x);
+.
+3.141592653589793
+if ($x == [Math PI])
+{
+   println("We have an accurate PI value!!");
+}
+.
+We have an accurate PI value!! done >
+----
+To leave interactive mode press Ctrl+D or type done on a line by itself.
+
+==== Abstract Syntax Trees
+The Sleep parser transforms code into an abstract syntax tree.
+Sleep uses this form to interpret your script. To view an abstract syntax tree for a script use the **tree** script name command.
+The tree command by itself shows the abstract syntax tree of the most recent script.
+----
+> tree
+[Decide]:
+    [Condition]:
+        [Predicate]:name->== negated->false
+            [Setup]:
+                [Get Item]: $x
+                [Create Frame]
+                [Object Access]: class java.lang.Math#PI
+    [If true]:
+        [Create Frame]
+        [Parsed Literal] null
+            [Element]: We have an accurate PI value!!
+        [Function Call]: &println
+    [If False]:
+----
+==== Debugging with the Console
+Set the script debug level with the debug level command. Once set all script snippets run with the debug level. For example level 8 enables function call tracing.
+----
+> debug 8
+Default debug level set
+> load hello.sl hello.sl
+loaded successfully.
+Hello World Trace:
+&println('Hello World') at line eval:1
+----
+=== 2. Scalars
+==== 2.1 Scalar Expressions
+Scalars are Sleep's universal data container.
+This chapter will cover how to assign and work with scalars.
+Later we will walk through some of the various types of scalars you will face while using Sleep.
+
+A variable is a temporary location in memory to store a value. Sleep variables are scalars. Scalars can be strings, numbers, or even a reference to a Java object.
+
+Scalar variable names always begin with the dollar sign.
+----
+
+Why do variable names have to begin with anything?
+
+Because when I wrote the Sleep parser I was too lazy to write it correctly and make it recognize bare-word variables. That and Perl expects variable names to begin with a dollar sign as well. Happy?
+----
+Scalar variables (referred to as scalars from now on) hold several types of data. This chapter discusses the number and string types.
+
+===== Assignment
+Assign values to variables with the equal sign. For example:
+----
+$x = 3;
+$y = $x;
+----
+This example places the integer 3 into the variable $x. $x now contains the integer 3 until another statement assigns to it. The second line copies the value $x into $y. $y has the value 3.
+
+
+There is no need to declare $x or $y before use. Sleep uses $null (the empty scalar) when a variable does not exist. Sleep discovers the type information of a value from the literal form. For example "blah" is a string scalar. In general, a scalar is a container that holds a value. Assignment places a value into a scalar.
+
+It is possible to declare variables before use. I recommend this practice as it helps with debugging. 5.2 Scalar Scope discusses variable declaration and debugging with strict mode.
+
+===== How Values are Passed
+The variable assignment process sometimes copies data and other times it copies a reference. Which of these occurs depends on the value's type.
+
+**Pass by value** defines variable assignment that copies the assigned value. Changes made to a copy do not affect the original value. Sleep passes number and string values by value.
+----
+$x = 3;
+$y = $x;
+$x = 4;
+----
+In the example above $x is initially 3. Line 2 assigns $y a copy of $x which is 3. $y now has the value 3. The last line assigns the value 4 to $x. The assignment does not affect $y since it has a copy of the value 3.
+
+**Pass by reference** is variable assignment that copies a reference to a value. Sleep uses references to share values between multiple scalars. Changes to one reference affect all scalars that reference the same data. This allows efficient use of computer memory for complex values. Sleep passes array, hash, and object values by reference.
+
+----
+# create a new java.lang.StringBuffer object
+$a = [new StringBuffer: "hello"];
+
+# assign a reference to the StringBuffer in $a to $b
+$b = $a;
+
+# append " world!" to the StringBuffer
+[$b append: " world!"];
+
+println($a);
+println($b);
+
+hello world!
+hello world!
+----
+
+WARNING: What does the pound sign represent?
+Sleep uses the pound sign for comments. Sleep interprets anything following a pound sign up to the end of a line as a comment. The parser strips away comments. Comments are a tool to let you document your programs.
+
+
+
+Getting ahead of ourselves, this example creates an object value and assigns it to $a. I then assign the object value in $a to $b. Sleep uses pass by reference since $a holds an object value. The next line appends the string " world!" to $b. The scalars $a and $b reference the same object. When the script prints out $a and $b the same result is shown for each.
+
+I hope this discussion clarified variables (scalars), types, and means of passing them. In the future I will speak of scalars and types as the same entity. From now on read the phrase string scalar as: "A scalar container that holds a Sleep string value."
+
+===== Expressions
+You can assign the results of an operation to a scalar. An operation is an operator surrounded by two values. For example 2 + 3 is the + operator applied to the values 2 and 3. Here are some valid operations:
+----
+$x = 5 + "1";
+$x = 5 - $y;
+$x = $x * $2;
+$x = $z / 9.9;
+$x = $1 % 3; # modulus
+$x = $1 ** 4; # exponentation
+----
+These operations work on numbers. There are operators for strings as well.
+----
+$x = "Ice" . "cream";
+----
+This example joins two strings with the string concatenation operator. $x has the string value: "Icecream".
+----
+$x = "abc" x 3;
+----
+This example shows the string multiplication operator. This operator repeats the left operand as set by the right operand.
+Here **$x** is "abcabcabc" or "abc" repeated 3 times.
+
+Combine multiple operators to form an expression.
+----
+$z = 5 + 1 * 3;
+----
+This example is valid. The plus, minus, and period (string concatenation) have lower precedence than multiplication, division, and modulus. This expression is equal to:
+----
+$z = 5 + (1 * 3);
+----
+Parentheses define which expression to evaluate first.
+----
+$z = 3 * ($x % 3) - (ticks() / (10000 + 1));
+----
+===== Assignment Operations
+Sleep supports a special assignment form called an assignment operator. An assignment operator combines operation on a scalar and assignment into a single step.
+----
+$x = 4;
+$x += 3;
+println($x);
+7
+----
+$x += 3 is the same as $x = $x + 3. Assignment operations are faster as they are less work for the Sleep interpreter. These are valid assignment operations: +=, -=, *=, /=, &=, |=, ^=, <<=, >>=, and .=.
+
+===== Mandated Whitespace
+Sleep scripts expect white space in expressions. Many languages allow you to get away with little white space. The following is valid in Perl:
+----
+$x=1+2;
+Error: Syntax error at line 1
+       $x=1+2
+----
+Sleep does not know what to do with the statement above and as you can see it reports a syntax error. Your scripts must use white space between operators and their operands.
+----
+$x = 1 + 2;
+----
+Think of this as a feature that forces reasonable coding habits.
+
+WARNING: Why is white space needed?
+Sleep is an extensible language. Sleep extensions (bridges) provide all the operations such as addition and subtraction. The Sleep parser does not know about these operators when it is parsing your script. The only way it knows an operator is an operator is by the context.
+Out of guilt I did add a hack to make Sleep recognize the string concatenation operator (a period) with or without white space. When I was in a Perl hacking mind-set I kept receiving parser errors because of my lack of whitespace around this operator. When I added this hack, I was already placing whitespace into my string concatenation operations. I managed to get over it.
+
+===== Scalar Types
+Sleep has many value types. This section summarizes them.
+
+===== String Scalars
+A string is a sequence of characters also know as arbitrary text. Any value may convert to a string. The integer 3 is equal to the string "3".
+----
+$var = "This is some arbitrary text";
+println($var);
+
+This is some arbitrary text
+----
+
+===== Numerical Scalars
+Sleep has several number types. This chapter discusses them later.
+----
+$x = 3; # integer
+$y = 3.4; # double
+$z = 45L; # long (64bit integer)
+----
+===== Arrays
+Arrays are a scalar that contain multiple values. Arrays store their values in numerical order. You may recall an array value by position.
+----
+@foo = @("a", "b", "c");
+$x = @foo[1] #$x is now "b"
+----
+===== Hash Scalars
+Hashes hold multiple values as well. Hashes act like dictionaries. You can store and lookup values by keyword.
+----
+%bar = %(x => "x-ray", y => "yabboes");
+$x = %bar["y"]; # $x is now "yabboes"
+----
+===== Object Scalars
+Sleep scalars may refer to Java objects. The function &openf creates an object holding the file handle. Sleep's input and output functions know how to work with this handle object.
+----
+$handle = openf("hello.txt");
+# call the readln function on the object scalar
+# that references a file handle for hello.txt
+$text = readln($handle);
+----
+You can also create Java objects through object expressions. Earlier you saw the pass by reference example create a java.lang.StringBuffer object. Chapter 7 covers this topic in-depth.
+
+===== Function Scalars
+Sleep functions are first class types. You can assign them to variables, pass them as parameters to functions, and all that other fun stuff. A function scalar is an object scalar that references a sleep.bridges.SleepClosure object.
+
+===== The mysterious $null
+$null is the null scalar. The null scalar is equal to nothingness. You cannot assign a value to $null.
+
+$null is equal to the number 0. As a string $null is equal to the empty string "". As an object $null is the same as the Java value null. Use the is predicate to check if a scalar is $null.
+
+----
+$ java -jar sleep.jar
+>> Welcome to the Sleep scripting language
+> ? $null eq ""
+true
+> ? $null is ""
+false
+> ? $null is 0
+false
+> ? $null is $null
+true
+----
+
+===== Scalar Descriptions
+Many of Sleep's built-in debugging and runtime warning messages provide a description of your data. Knowing scalar descriptions will help you decipher what Sleep is telling you about your program behavior. This table summarizes the descriptions that Sleep uses for each type:
+
+.Scalar Descriptions
+|===
+|Type |Example
+
+|String
+|'some value'
+
+|Integer
+|3
+
+|Long
+|4L
+
+|Double
+|5.4
+
+|Object
+|...
+
+|Array
+|@(...)
+
+|Hash
+|%(...)
+
+|Key/Value Pair
+|key => value
+
+|Closure
+|&closure[script.sl:3-5]#4
+
+|Null Scalar
+|$null
+|===
+
+Use the &typeOf function to find out the type of a scalar.
+
+----
+$long = 4L;
+$double = 3.5;
+$result = $long + $double; # what is the result?
+println("Type of result is: " . typeOf($result));
+----
+Type of result is: class sleep.engine.types.DoubleValue
+
+==== 2.2 Numbers
+Sleep supports three types of scalars for numbers. Whole numbers such as -1, 0, 1, 2 ... 65536 are integer values. Double values have a decimal in them such as 3.0, 1.1, 0.55556. This example assigns a double value to a scalar:
+
+----
+$Pi = 3.1415926535;
+----
+You can use the hexadecimal form to specify integers. A hexadecimal number begins with 0x.
+
+----
+$var = 0xFF; # same as $var = 255
+----
+Sleep also supports octal literals. A number that begins with a leading zero is an octal number.
+
+----
+$oct = 077; # same as $var = 63
+----
+
+A long is a higher capacity integer. Integer scalars use 32 bits. Longs use 64. An integer can represent a whole number between -2,147,483,648 to +2,147,483,64. A long has a larger capacity.
+
+Add an L to the end of a number to declare a long. For example, 12345L is a long scalar. The L accepts hex and octal literals as well.
+
+Use &formatNumber and &parseNumber to format and parse numbers in other bases.
+
+===== Increment and Decrement Operators
+
+Sleep has a special operator for integer scalars. Instead of typing
+
+----
+$x = $x + 1;
+----
+You can use the increment operator on the scalar $x.
+
+----
+$x++;
+----
+The two are equivalent. $x++ increments the value of $x and returns $x + 1. The decrement operator works similiarly except it subtracts rather than adds. $x-- decrements the value of $x and returns $x - 1.
+
+===== Useful Constants
+
+The Java class library contains several numerical constants. Use an object expression to access them. PI is available as [Math PI] and E is available as [Math E]. These constructs return double scalars.
+
+----
+# show off mathematical constants.
+
+$Pi = [Math PI];
+println("Pi is $Pi");
+
+$E  = [Math E];
+println("E  is $E");
+
+Pi is 3.141592653589793
+E  is 2.718281828459045
+----
+This table shows the operators available for manipulating number scalars.
+
+.operators
+|===
+|Operator |Description
+
+|*
+|multiplication
+
+|/
+|division
+
+|+
+|addition
+
+|-
+|subtraction
+
+|%
+|modulus; remainder operator
+
+|**
+|exponentation
+
+|\<\=>
+|numerical comparison
+|===
+
+
+The multiplication and division operators have a higher precedence than all other operators. For bit twiddling Sleep provides the following operators:
+
+|===
+|Operator |Description
+
+|<<
+|left shift
+
+|>>
+|right shift
+
+|^
+|exclusive or
+
+|&
+|and
+
+||
+|or
+
+|not($x)
+|negates $x
+|===
+Logical operators are only valid on scalar longs and ints. Sleep will do its best to convert other types to a fitting int value.
+
+===== Conversion of Scalars
+When performing a numerical operation or comparison on different types a conversion will occur. For example, Sleep will convert an operand to a double if the other operand is a double. The result of this operation is a double as well. A similar process occurs for longs. Integers have the lowest conversion priority.
+
+Use casting functions to force a scalar to a certain type.
+
+.force a scalar to a certain type
+|===
+|Function |Description
+
+|double($x)
+|returns the value of $x as a double scalar
+
+|long($x)
+|returns the value of $x as a long scalar
+
+|int($x)
+|returns the value of $x as a int scalar
+|===
+More sophisticated casting exists for the purpose of interacting with Java. Chapter 7 introduces these.
+
+===== Time and Date Values
+
+Sleep scripts can work with date and time values. Sleep stores date and time values as a long with the number of milliseconds since the epoch. Sleep's epoch is midnight, January 1st, 1970. Sleep uses this millisecond form instead of a string representation.
+
+The &formatDate and &parseDate functions expect a datetime format string. &formatDate formats a date and time value into a string representation. The &parseDate creates a date and time value from a string representation and a datetime format.
+
+A datetime format specifies a template of a date and time string representation. Sleep interprets unquoted letters from 'A' to 'Z' and 'a' to 'z' in the pattern as parts of a date or time template. Avoid this interpretation by surrounding text with single quotes. For example 'at' represents the word at.
+
+The following pattern letters are available (Java currently reserves other characters):
+
+
+.pattern letters
+|===
+|Letter |Description |Examples
+
+|G
+|Era designator
+|AD
+
+|y
+|Year
+|2004 ; 04
+
+|M
+|Month in year
+|October ; Oct ; 10
+
+|w
+|Week in year
+|27
+
+|W
+|Week in month
+|2
+
+|D
+|Day in year
+|127
+
+|d
+|Day in month
+|10
+
+|F
+|Day of week in month
+|2
+
+|E
+|Day in week
+|Monday ; Mon
+
+|a
+|Am/pm marker
+|PM
+
+|H
+|Hour in day (0-23)
+|0
+
+|k
+|Hour in day (1-24)
+|24
+
+|K
+|Hour in am/pm (0-11)
+|0
+
+|h
+|Hour in am/pm (1-12)
+|11
+
+|m
+|Minute in hour
+|34
+
+|s
+|Second in minute
+|52
+
+|S
+|Millisecond
+|745
+
+|z
+|Time zone
+|Eastern Standard Time ;EST ;GMT-04:00
+
+|Z
+|Time zone
+|-0400
+|===
+Repeat pattern letters to specify the exact presentation. For example 'E' is the day of week pattern letter. 'EEE' refers to the short form of the day of the week such as Weds. 'EEEE' refers to the long form such as Wednesday. Another example: 'yy' will truncuate the year to 2 digits.
+
+The &ticks function returns the current time in milliseconds since the epoch. This example shows date formatting and parsing in action:
+
+----
+# lets do a little 'date' arithmetic
+$event = "14/Oct/2006:12:24:00 -0500";
+$a = parseDate('dd/MMM/yyyy:kk:mm:ss Z',$event);
+$now = "2006.10.14 at 13:40:00 EDT";
+$b = parseDate("yyyy.MM.dd 'at' HH:mm:ss z", $now);
+# keep in mind we are dealing with milliseconds
+# i.e. 60 * 1000 = 1 minute
+$diff = $b - $a;
+println("event occured " . ($diff / 60000) . " minutes ago");
+# subtract the difference from our "now" value
+$when = $b - $diff;
+println("event occured " . formatDate($when, "yyyy.MM.dd 'at' HH:mm:ss z"));
+----
+----
+event occured 16 minutes ago
+event occured 2006.10.14 at 13:24:00 EDT
+----
+
+==== 2.3 Strings
+Sleep strings come in two varieties. Literals and parsed literals. A literal string is a string where what you type is exactly what you get.
+
+----
+$flavor = "mint chocolate chip";
+println('I love $flavor $+ !!!');
+----
+----
+I love $flavor $+ !!!
+----
+
+Enclose literal strings in single quotes. Pay special attention to which types of quotes you use as there is a difference between literal strings and parsed literal strings.
+
+===== Parsed Literals
+Parsed literal strings replace $scalar variables with their value. Enclose parsed literal strings with double quotes.
+
+----
+$flavor = "mint chocolate chip";
+println("I love $flavor $+ !!!");
+----
+----
+I love mint chocolate chip!!!
+----
+
+Parsed literals only evaluate variables beginning with a $ sign. Surround variables with whitespace to allow the parsed literal to extract the variable name. The $+ value acts as a concatenation operator to remove unwanted whitespace within parsed literals.
+
+----
+$super = "Super";
+$mang = "man";
+
+println("Oh no! Where is $super $+ $mang $+ ???");
+----
+Oh no! Where is Superman???
+
+Wait, there's more. Parsed literals also support built-in formatting for scalars.
+
+----
+$first = "First";
+$last  = "Last";
+$worth = "Worth";
+
+println("$[10]first $[10]last $[-6]worth");
+println("-" x 28);
+
+$first = "John";
+$last  = "Doe";
+$worth = "12K";
+
+println("$[10]first $[10]last $[-6]worth");
+
+$first = "John";
+$last  = "Deer";
+$worth = "-45K";
+
+println("$[10]first $[10]last $[-6]worth");
+
+First      Last        Worth
+----------------------------
+John       Doe           12K
+John       Deer         -45K
+----
+
+The built-in formatting aligns values to a set number of spaces. Specify the number within square brackets. By default, Sleep pads the value with spaces to the right. If you specify a negative number, the interpreter pads with spaces to the left.
+
+You may also use an expression within the square brackets.
+
+Escape characters within a parsed literal with the back slash character. The interpreter ignores the character immediately following a back slash. The interpreter also removes the initial backslash during processing. Some escaped characters have special meanings.
+
+.Escape characters
+|===
+|Escape |Description
+
+|\n
+|newline character
+
+|\r
+|return character
+
+|\t
+|tab character
+
+|\u#\###
+|16 bit unicode character i.e. "\u0063" is "c"
+
+|\x##
+|8 bit character i.e. "\x6A" is "j"
+
+|\\
+|back slash \ character
+|===
+Sleep provides these operations for use with Strings.
+
+.operations for use with Strings
+|===
+|Operator |Description
+
+|.
+|concatenation
+
+|x
+|string multiplication (i.e. "a" x 3 = "aaa")
+
+|cmp
+|string comparison
+|===
+Sleep has numerous functions that parse and manipulate strings. &left and &right extract left most and right most characters. &substr and &mid extract substrings from a string. &split breaks a string up into tokens with a delimiter and &join puts it back together again. &replaceAt and &strrep substitute substrings for other strings. And &strlen is used to find out the length of a string.
+
+----
+$ java -jar sleep.jar
+>> Welcome to the Sleep scripting language
+> x strlen("this is a test")
+14
+> x split(" ", "this is a test")
+@('this', 'is', 'a', 'test')
+> x replaceAt("this is a test", "is not", 5, 2)
+this is not a test
+> x uc("this is a ...")
+THIS IS A ...
+----
+
+Many string functions allow the use of negative indices when specifying a character position. Sleep adds a negative index to the string length to obtain the real offset.
+
+----
+> x substr("this is a test!!", -6, -2)
+test
+> x indexOf("this is a test!!", "s", -6)
+12
+> x charAt("this is a test!!", -4)
+s
+----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
