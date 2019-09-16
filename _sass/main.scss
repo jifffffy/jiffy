@@ -311,7 +311,7 @@ ul {
           height: 25px;
           line-height: 25px;
           min-width: 51%;
-          max-width: 100px;
+          max-width: 100%;
           float: left;
           color: #1D9DD1;
           font-weight: 600;
@@ -348,7 +348,7 @@ ul {
 
       .arttitle {
         height: 40px;
-        width: 400px;
+        width: 350px;
         float: left;
         cursor: pointer;
         margin: 0px 0px 0px 40px;
@@ -374,9 +374,9 @@ ul {
       }
 
       .artdes {
-        height: 60px;
+        height: 100px;
         line-height: 20px;
-        width: 400px;
+        width: 350px;
         float: left;
         overflow: hidden;
         color: #888888;
@@ -1699,7 +1699,7 @@ ul {
   }
 
   .hottag {
-    width: 260px;
+    width: 100%;
     float: left;
     padding: 0px 20px 20px 20px;
     margin: 20px 0px 0px 0px;
@@ -1787,7 +1787,7 @@ ul {
   }
 
   .hotuser {
-    width: 260px;
+    width: 100%;
     float: left;
     padding: 0px 20px 20px 20px;
     margin: 20px 0px 0px 0px;
@@ -1808,7 +1808,7 @@ ul {
       float: left;
 
       li {
-        height: 50px;
+        height: 70px;
         width: 100%;
         padding: 10px 0px;
         border-bottom: 1px solid #EEEEEE;
@@ -1849,7 +1849,7 @@ ul {
 
     span {
       height: 50px;
-      width: 190px;
+      width: 150px;
       float: left;
       overflow: hidden;
       margin: 0px 0px 0px 20px;

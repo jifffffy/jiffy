@@ -80,7 +80,23 @@ These point out questions folks have asked in the past.
 
 === III. Acknowledgements
 
-I'll keep this list short and sweet. I just want to quickly acknowledge some of the folks whose input has shaped Sleep. I'm still doing this project for the fun of it but its good to know these guys are out there. I'd like to thank Andreas Ravnestad for his work on Slumber. Andreas and Serge Baranov both deserve thanks for their contributions to jIRCii in the past. The jIRCii community put up with a very rough scripting language a few years ago. To that end I owe a thanks to Dan "phos" Fare, mexis, T.J "ceelow" Smith, tijiez, neuken, [rza], blue-elf, drakx, and all the others who put their creativity and enthusiasm into writing Sleep scripts for jIRCii. Thanks for finding the issues so others don't have to. I'd also like to thank Kurt von Finck (mneptok) for his support and advocacy. Marty Sheppard deserves mad greets. He is one of the drivers throwing Sleep at real projects. His work and input has had quite an influence on Sleep. I also want to say thanks to skape, shane, ratdog, brian, and the rest of the hick.org crew. Hick hosted the Sleep and jIRCii sites for the first several years of their existence. Thanks to Brandon Mumby for providing me a place to run my experimental Sleep webserver. This "experimental" server is currently hosting the jIRCii and Sleep websites. Also I'll thank those of you who come out of nowhere emailing me oddball questions about Sleep in weird contexts. Thanks for keeping me amused.
+I'll keep this list short and sweet. I just want to quickly acknowledge some of the folks whose input has shaped Sleep.
+I'm still doing this project for the fun of it but its good to know these guys are out there.
+
+I'd like to thank Andreas Ravnestad for his work on Slumber. Andreas and Serge Baranov both deserve thanks for their contributions to jIRCii in the past.
+The jIRCii community put up with a very rough scripting language a few years ago.
+To that end I owe a thanks to Dan "phos" Fare, mexis, T.J "ceelow" Smith, tijiez, neuken, [rza], blue-elf, drakx, and all the others who put their creativity
+and enthusiasm into writing Sleep scripts for jIRCii.
+Thanks for finding the issues so others don't have to.
+I'd also like to thank Kurt von Finck (mneptok) for his support and advocacy.
+Marty Sheppard deserves mad greets. He is one of the drivers throwing Sleep at real projects.
+His work and input has had quite an influence on Sleep.
+I also want to say thanks to skape, shane, ratdog, brian, and the rest of the hick.org crew.
+ Hick hosted the Sleep and jIRCii sites for the first several years of their existence.
+ Thanks to Brandon Mumby for providing me a place to run my experimental Sleep webserver.
+ This "experimental" server is currently hosting the jIRCii and Sleep websites.
+ Also I'll thank those of you who come out of nowhere emailing me oddball questions about Sleep in weird contexts.
+ Thanks for keeping me amused.
 
 == 1. Getting Started
 
@@ -260,12 +276,10 @@ Later we will walk through some of the various types of scalars you will face wh
 A variable is a temporary location in memory to store a value. Sleep variables are scalars. Scalars can be strings, numbers, or even a reference to a Java object.
 
 Scalar variable names always begin with the dollar sign.
-----
 
-Why do variable names have to begin with anything?
 
+TIP: Why do variable names have to begin with anything?
 Because when I wrote the Sleep parser I was too lazy to write it correctly and make it recognize bare-word variables. That and Perl expects variable names to begin with a dollar sign as well. Happy?
-----
 Scalar variables (referred to as scalars from now on) hold several types of data. This chapter discusses the number and string types.
 
 ===== Assignment
