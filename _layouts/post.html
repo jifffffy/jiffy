@@ -17,7 +17,7 @@ layout: default
                 <a  title="{{ tag }}" href="{{ site.baseurl }}/blog/tags/{{ tag }}" class="t{{ forloop.index }}">{{ tag }}</a>
                 {% endfor %}
             </div>
-            <div class="detailinfo aligncenter">
+            <div class="detailadoc">
                 {{ content }}
             </div>
         </div>
@@ -28,7 +28,7 @@ layout: default
             <span class="btn right right" onclick="SubmitCommentByArt(3317370)">评论</span>
         </div>
     </div>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
     <script>
         var gitalk  = new Gitalk ({

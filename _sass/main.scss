@@ -40,10 +40,10 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
 }
 
-p {
+/*p {
   margin: 0px;
   padding: 0px;
-}
+}*/
 
 input {
   &[type='text'], &[type='password'] {
@@ -100,7 +100,7 @@ input {
 
 /*各类按钮*/
 
-.btn {
+.btn .gt-btn {
   height: 30px;
   line-height: 30px;
   float: left;
@@ -1103,7 +1103,7 @@ input {
       margin: 20px 0px 0px 0px;
 
       &.aligncenter {
-        /*text-align:center;*/
+        text-align:center;
       }
 
       h1 {
@@ -1199,6 +1199,12 @@ input {
       .reply {
         background-image: url('/assets/images/toolImg/Icon_04.png');
       }
+    }
+
+    .detailadoc {
+      width: 100%;
+      float: left;
+      margin: 20px 0px 0px 0px;
     }
 
     .vote {

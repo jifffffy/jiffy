@@ -1,7 +1,7 @@
 :page-title: Sleep
 :page-author: Sunyuyangg555
 :page-avatar: devlopr.png
-:page-image: sleep.png
+:page-image: jirciiWIN.jpg
 :page-category: guides
 :page-tags: [ java, sleep]
 :page-excerpt: Sleep is a Java-based scripting language heavily inspired by Perl. Sleep started out as a weekend long hack fest in April 2002. When nothing like Perl was available to build a scriptable Internet Relay Chat client, I set out to build the scripting language I wanted.
@@ -589,7 +589,7 @@ The multiplication and division operators have a higher precedence than all othe
 |&
 |and
 
-||
+|\|
 |or
 
 |not($x)
