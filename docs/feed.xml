@@ -1,0 +1,1428 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-29T15:05:17+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jekyll AsciiDoc Blog</title><subtitle>The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on GitHub with content based in AsciiDoc.</subtitle><entry><title type="html">Converting A Virtual Image To A Physical Machine</title><link href="http://localhost:4000/guides/2020/05/29/v2p.html" rel="alternate" type="text/html" title="Converting A Virtual Image To A Physical Machine" /><published>2020-05-29T00:00:00+08:00</published><updated>2020-05-29T00:00:00+08:00</updated><id>http://localhost:4000/guides/2020/05/29/v2p</id><content type="html" xml:base="http://localhost:4000/guides/2020/05/29/v2p.html">&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;1requirements&quot;&gt;1、Requirements&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;To perform this procedure you will need:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;VMware Workstation, VMware Server or VMware Player.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CloneZilla ISO image.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Unpartitioned HDD with enough space to hold your VM image.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;2preliminary_notes&quot;&gt;2、Preliminary Notes&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This tutorial assumes basic knowledge of the cloning process and requires no previous experience on the use of Clonezilla. Make sure your OS is not using in any way the target HDD that will hold your final copy of the VM, otherwise VMware will complain about your disk been in use and CloneZilla will not perform a successful copy of the VM.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;3vmware_configuration&quot;&gt;3、VMware Configuration&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;First thing is to make sure your virtual CD/DVD is using your CloneZilla ISO image to boot. Next add your physical HDD as part of your existing VM by clicking the Add button.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;/assets/images/20200529/image001.jpg&quot; alt=&quot;image001&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Select &lt;code&gt;Hard Drive&lt;/code&gt; and click &lt;code&gt;Next&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;/assets/images/20200529/image003.jpg&quot; alt=&quot;image003&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Select &lt;code&gt;Use physical disk (for advanced users)&lt;/code&gt; then click &lt;code&gt;Next&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;/assets/images/20200529/image004.jpg&quot; alt=&quot;image004&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Make sure you select the correct drive that you want to use for your physical disk and select the option &lt;code&gt;Use entire disk&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;/assets/images/20200529/image005.jpg&quot; alt=&quot;image005&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Finally give a name to your configuration file then click &lt;code&gt;Finish&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;/assets/images/20200529/image006.jpg&quot; alt=&quot;image006&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Make sure your final VMware hardware list include this two elements otherwise, start all over.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;/assets/images/20200529/image007.jpg&quot; alt=&quot;image007&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;4another_way&quot;&gt;4、Another way&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the .vmdk virtual disk of the VM.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Convert it from vmdk to raw format using the qemu-img tool C:\Tools\qemu-img&amp;gt;qemu-img convert -f vmdk G:\VM\Streamer1.vmdk -O raw G:\Streamer1.raw&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Write the raw file to the physical HD (on windows system you can use Win32 Disk Imager)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The HD will now contain all partitions and data initially stored in the .vmdk disk, put and boot in the physical machine.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content><author><name>Jiffy</name></author><category term="Virtual" /><summary type="html">This tutorial shows how to convert an existing CentOS VM to a Physical machine. This tutorial covers the cloning of the VM to an unpartitioned HDD and troubleshoot some of the possible errors that you may have booting the OS on your new hardware. To illustrate this procedure I will use VMware Workstation 7 as the handler to transfer the VM installation to a physical HDD.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/20200529/image007.jpg" /></entry><entry><title type="html">Sleep</title><link href="http://localhost:4000/guides/2019/09/13/sleep.html" rel="alternate" type="text/html" title="Sleep" /><published>2019-09-13T00:00:00+08:00</published><updated>2019-09-13T00:00:00+08:00</updated><id>http://localhost:4000/guides/2019/09/13/sleep</id><content type="html" xml:base="http://localhost:4000/guides/2019/09/13/sleep.html">&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;i_what_is_sleep&quot;&gt;I. What is Sleep?&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The java world currently has Jacl for TCL, Jython for Python, and JRuby for Ruby. One offering is missing from this bunch: what Java scripting language exists for the Perl hackers of the world?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep is a Java-based scripting language heavily inspired by Perl. Sleep started out as a weekend long hack fest in April 2002. When nothing like Perl was available to build a scriptable Internet Relay Chat client, I set out to build the scripting language I wanted.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;/assets/images/jirciiWIN.jpg&quot; alt=&quot;jirciiWIN&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Go ahead and download jIRCii to see what Sleep can do. &lt;a href=&quot;http://jircii.dashnine.org/&quot; class=&quot;bare&quot;&gt;http://jircii.dashnine.org/&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep has evolved beyond its beginnings as a scripting engine for a chat program. Today Sleep primitives include strings, doubles, integers, and containers for holding objects and functions. Arrays and hashes can combine these primitives into complex data structures. Closures that respond to &quot;messages&quot; act as a flexible means of abstraction. Also The entire Java API is accessible as if the Java Objects were functions that respond to &quot;messages&quot;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect3&quot;&gt;
+&lt;h4 id=&quot;sleep_website&quot;&gt;Sleep Website&lt;/h4&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;It is about 11:30pm on a Friday night and I would love to know where I can get some sleep. All puns aside, the latest version of Sleep is always available at the Sleep homepage:
+&lt;a href=&quot;http://sleep.dashnine.org/&quot; class=&quot;bare&quot;&gt;http://sleep.dashnine.org/&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;You will find documentation, script examples, articles, and extensions at the Sleep homepage.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect3&quot;&gt;
+&lt;h4 id=&quot;how_to_receive_support&quot;&gt;How to receive support&lt;/h4&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Most sleep discussion takes place on a google group. Through this group you can see what is on the horizon with Sleep and comment on open ideas. This is also a great place to report bugs and receive support.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;http://groups.google.com/group/sleep-developers/&quot; class=&quot;bare&quot;&gt;http://groups.google.com/group/sleep-developers/&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you prefer to chat with a living person, you may find me and some Sleep hackers on internet relay chat (IRC). We are in the #jIRCii channel on the EFNet IRC network. A list of EFNet servers is available at &lt;a href=&quot;http://www.efnet.org/&quot; class=&quot;bare&quot;&gt;http://www.efnet.org/&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect3&quot;&gt;
+&lt;h4 id=&quot;sleep_snippets_blog&quot;&gt;Sleep Snippets Blog&lt;/h4&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;O&amp;#8217;Reilly and Associates has a successful series of books on technology hacks. These books consist of about 100 stand-alone tips and code snippets around a core subject. In this spirit Sleep has the Sleep Snippets Weblog. Each new snipppet (with explanation) shows off cool Sleep capabilities.
+&lt;a href=&quot;http://jroller.com/page/sleepsnip&quot; class=&quot;bare&quot;&gt;http://jroller.com/page/sleepsnip&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;ii_manual_conventions&quot;&gt;II. Manual Conventions&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This manual consists of two sections. The first section is a tutorial on the Sleep language. This section is small on purpose. Read it to get a good grounding in the terminology, idioms, and features of the Sleep language. The second section is a man-page style reference on the standard Sleep library. This reference includes descriptions of each parameter, example code, and related topics.
+The following conventions exist throughout this manual.
+A monospaced font signals source code.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;code&gt;
+println(&quot;hello world&quot;);
+&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Italicized text refers to variable names.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$variable, @array, %hash.&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This guide displays function names in a monospaced font.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;code&gt;&amp;amp;foo&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Examples will occasionally show input or user originated commands. A strong typeface marks this.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;java -jar sleep.jar&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Program output is below:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;I am some output&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This manual also highlights frequently asked questions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;admonitionblock warning&quot;&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td class=&quot;icon&quot;&gt;
+&lt;i class=&quot;fa icon-warning&quot; title=&quot;Warning&quot;&gt;&lt;/i&gt;
+&lt;/td&gt;
+&lt;td class=&quot;content&quot;&gt;
+What are these boxes?
+This is a frequently asked questions box.
+These point out questions folks have asked in the past.
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;iii_acknowledgements&quot;&gt;III. Acknowledgements&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I&amp;#8217;ll keep this list short and sweet. I just want to quickly acknowledge some of the folks whose input has shaped Sleep.
+I&amp;#8217;m still doing this project for the fun of it but its good to know these guys are out there.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I&amp;#8217;d like to thank Andreas Ravnestad for his work on Slumber. Andreas and Serge Baranov both deserve thanks for their contributions to jIRCii in the past.
+The jIRCii community put up with a very rough scripting language a few years ago.
+To that end I owe a thanks to Dan &quot;phos&quot; Fare, mexis, T.J &quot;ceelow&quot; Smith, tijiez, neuken, [rza], blue-elf, drakx, and all the others who put their creativity
+and enthusiasm into writing Sleep scripts for jIRCii.
+Thanks for finding the issues so others don&amp;#8217;t have to.
+I&amp;#8217;d also like to thank Kurt von Finck (mneptok) for his support and advocacy.
+Marty Sheppard deserves mad greets. He is one of the drivers throwing Sleep at real projects.
+His work and input has had quite an influence on Sleep.
+I also want to say thanks to skape, shane, ratdog, brian, and the rest of the hick.org crew.
+ Hick hosted the Sleep and jIRCii sites for the first several years of their existence.
+ Thanks to Brandon Mumby for providing me a place to run my experimental Sleep webserver.
+ This &quot;experimental&quot; server is currently hosting the jIRCii and Sleep websites.
+ Also I&amp;#8217;ll thank those of you who come out of nowhere emailing me oddball questions about Sleep in weird contexts.
+ Thanks for keeping me amused.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;1_getting_started&quot;&gt;1. Getting Started&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;1_1_stand_alone_scripts&quot;&gt;1.1 Stand-alone Scripts&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep scripts run stand-alone from the command line using sleep.jar as the interpreter.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The traditional first script is usually the famous Hello World program. As I am a fan of tradition your first Sleep script will be a Hello World script as well.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;To run the following script: type the source code into a text editor, save it as hello.sl, and then run it by typing:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;java -jar sleep.jar hello.sl&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;code&gt;println(&quot;Hello World&quot;);&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;Hello World&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Congratulations! You have written and ran your first Sleep script.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect3&quot;&gt;
+&lt;h4 id=&quot;command_line_arguments&quot;&gt;Command Line Arguments&lt;/h4&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Scripts run from the command line can receive arguments. Sleep stores arguments in the variable @ARGV. For example the following sleep script copies files. The source file is @ARGV[0] and the destination file is @ARGV[1].&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;# cp.sl [original file] [new file]
+$in = openf(@ARGV[0]);
+$data = readb($in, -1);
+$out = openf(&quot;&amp;gt;&quot; . @ARGV[1]);
+writeb($out, $data); closef($in);
+closef($out);&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$ java -jar sleep.jar cp.sl hello.sl hello.bak
+$ cat hello.bak&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;println(&quot;Hello World&quot;);&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;strong&gt;$__SCRIPT__&lt;/strong&gt; variable contains the name of the current script.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect3&quot;&gt;
+&lt;h4 id=&quot;command_line_options&quot;&gt;Command Line Options&lt;/h4&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep accepts many command line arguments.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$ java -jar sleep.jar --help
+Sleep 2.1 (20080515) Usage: java [properties] -jar sleep.jar [options] [-|file|expression]
+properties:
+    -Dsleep.assert=&amp;lt;true|false&amp;gt;
+    -Dsleep.classpath=&amp;lt;path to locate 3rd party jars from&amp;gt;
+    -Dsleep.debug=&amp;lt;debug level&amp;gt;
+    -Dsleep.taint=&amp;lt;true|false&amp;gt;
+options:
+    -a --ast display the abstract syntax tree of the specified script
+    -c --check check the syntax of the specified file
+    -e --eval evaluate a script as specified on command line
+    -h --help display this help message
+    -p --profile collect and display runtime profile statistics
+    -t --time display total script runtime
+    -v --version display version information
+    -x --expr evaluate an expression as specified on the command line file: specify a '-' to read script from STDIN&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Java passes the &lt;strong&gt;[properties]&lt;/strong&gt; directly to Sleep. These properties are available from the &lt;strong&gt;&amp;amp;systemProperties&lt;/strong&gt; function.
+The sleep.assert property enables or disables assertions. This manual discusses assertions in 3.4 Assertions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The sleep.classpath property specifies where Sleep should look for 3rd party jar files loaded with import [path] from: [jar file] and &amp;amp;use. Use a semicolon or colon between entries to specify more than one path. Chapter 7.1 Object Expressions: 3rd-party Jars discusses the import from ability in detail.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The sleep.debug property specifies the debug level to run the script with. This manual sprinkles script debugging topics throughout its pages.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The sleep.taint property enables or disables taint mode. When enabled, taint mode marks all data from external sources as tainted. Some Sleep functions do not accept tainted data. 6.1 Object Expressions: Taint Mode and Objects and 9.3 Sleep Integration: Taint Mode discuss this security feature in detail.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The Sleep console runs when there is no script file.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;Can I start Sleep scripts with jrunscript?
+
+Java 1.6 includes a new programming interface to allow interchangeable use of different script engines. Sleep 2.1 supports this interface and yes you can launch Sleep scripts with jrunscript. Make sure sleep.jar is in your classpath for the following to work:
+
+$ jrunscript -l sleep -f hello.sl
+
+@ARGV and $__SCRIPT__ are available to scripts run through jrunscript.&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;1_2_the_sleep_console&quot;&gt;1.2 The Sleep Console&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The Sleep console is an environment that runs Sleep code interactively. You will know you are in the Sleep console when you see the following:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$ java -jar sleep.jar
+&amp;gt;&amp;gt; Welcome to the Sleep scripting language
+&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect3&quot;&gt;
+&lt;h4 id=&quot;help_within_the_console&quot;&gt;Help within the Console&lt;/h4&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;strong&gt;help&lt;/strong&gt; command is available for getting help. Simply type help command name to receive information about a command. The help command by itself simply lists the available commands.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect3&quot;&gt;
+&lt;h4 id=&quot;evaluate_an_expression&quot;&gt;Evaluate an Expression&lt;/h4&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;To evaluate an expression using the Sleep console use the &lt;strong&gt;x&lt;/strong&gt; command.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;&amp;gt; x 3 + 4
+7
+&amp;gt; x split(&quot; &quot;, &quot;Hello World&quot;)
+@('Hello', 'World')
+&amp;gt; x [Math PI]
+3.141592653589793&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;To evaluate a predicate expression (an if condition) use the &lt;strong&gt;?&lt;/strong&gt; command.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;&amp;gt; ? 3 eq &quot;3&quot;
+true
+&amp;gt; ? 3 eq 3.0
+false
+&amp;gt; ? (3 == 3) &amp;amp;&amp;amp; ($x is $null || 3 == 4)
+true&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect3&quot;&gt;
+&lt;h4 id=&quot;interact_mode&quot;&gt;Interact Mode&lt;/h4&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;You can type any amount of Sleep code with interactive mode. Launch interactive mode with the &lt;strong&gt;interact&lt;/strong&gt; command. Place a period on a line by itself once the code is ready for evaluation.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;&amp;gt; interact
+&amp;gt;&amp;gt; Welcome to interactive mode.
+Type your code and then '.' on a line by itself to execute the code.
+Type Ctrl+D or 'done' on a line by itself to leave interactive mode.
+println(&quot;Hello World&quot;);
+.
+Hello World
+$x = 4 * atan2(1, 1);
+println($x);
+.
+3.141592653589793
+if ($x == [Math PI])
+{
+   println(&quot;We have an accurate PI value!!&quot;);
+}
+.
+We have an accurate PI value!! done &amp;gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;To leave interactive mode press Ctrl+D or type done on a line by itself.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect3&quot;&gt;
+&lt;h4 id=&quot;abstract_syntax_trees&quot;&gt;Abstract Syntax Trees&lt;/h4&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The Sleep parser transforms code into an abstract syntax tree.
+Sleep uses this form to interpret your script. To view an abstract syntax tree for a script use the &lt;strong&gt;tree&lt;/strong&gt; script name command.
+The tree command by itself shows the abstract syntax tree of the most recent script.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;&amp;gt; tree
+[Decide]:
+    [Condition]:
+        [Predicate]:name-&amp;gt;== negated-&amp;gt;false
+            [Setup]:
+                [Get Item]: $x
+                [Create Frame]
+                [Object Access]: class java.lang.Math#PI
+    [If true]:
+        [Create Frame]
+        [Parsed Literal] null
+            [Element]: We have an accurate PI value!!
+        [Function Call]: &amp;amp;println
+    [If False]:&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect3&quot;&gt;
+&lt;h4 id=&quot;debugging_with_the_console&quot;&gt;Debugging with the Console&lt;/h4&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Set the script debug level with the debug level command. Once set all script snippets run with the debug level. For example level 8 enables function call tracing.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;&amp;gt; debug 8
+Default debug level set
+&amp;gt; load hello.sl hello.sl
+loaded successfully.
+Hello World Trace:
+&amp;amp;println('Hello World') at line eval:1&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;2_scalars&quot;&gt;2. Scalars&lt;/h3&gt;
+&lt;div class=&quot;sect3&quot;&gt;
+&lt;h4 id=&quot;2_1_scalar_expressions&quot;&gt;2.1 Scalar Expressions&lt;/h4&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Scalars are Sleep&amp;#8217;s universal data container.
+This chapter will cover how to assign and work with scalars.
+Later we will walk through some of the various types of scalars you will face while using Sleep.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A variable is a temporary location in memory to store a value. Sleep variables are scalars. Scalars can be strings, numbers, or even a reference to a Java object.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Scalar variable names always begin with the dollar sign.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;admonitionblock tip&quot;&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td class=&quot;icon&quot;&gt;
+&lt;i class=&quot;fa icon-tip&quot; title=&quot;Tip&quot;&gt;&lt;/i&gt;
+&lt;/td&gt;
+&lt;td class=&quot;content&quot;&gt;
+Why do variable names have to begin with anything?
+Because when I wrote the Sleep parser I was too lazy to write it correctly and make it recognize bare-word variables. That and Perl expects variable names to begin with a dollar sign as well. Happy?
+Scalar variables (referred to as scalars from now on) hold several types of data. This chapter discusses the number and string types.
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;assignment&quot;&gt;Assignment&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Assign values to variables with the equal sign. For example:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$x = 3;
+$y = $x;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This example places the integer 3 into the variable $x. $x now contains the integer 3 until another statement assigns to it. The second line copies the value $x into $y. $y has the value 3.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;There is no need to declare $x or $y before use. Sleep uses $null (the empty scalar) when a variable does not exist. Sleep discovers the type information of a value from the literal form. For example &quot;blah&quot; is a string scalar. In general, a scalar is a container that holds a value. Assignment places a value into a scalar.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;It is possible to declare variables before use. I recommend this practice as it helps with debugging. 5.2 Scalar Scope discusses variable declaration and debugging with strict mode.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;how_values_are_passed&quot;&gt;How Values are Passed&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The variable assignment process sometimes copies data and other times it copies a reference. Which of these occurs depends on the value&amp;#8217;s type.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Pass by value&lt;/strong&gt; defines variable assignment that copies the assigned value. Changes made to a copy do not affect the original value. Sleep passes number and string values by value.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$x = 3;
+$y = $x;
+$x = 4;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In the example above $x is initially 3. Line 2 assigns $y a copy of $x which is 3. $y now has the value 3. The last line assigns the value 4 to $x. The assignment does not affect $y since it has a copy of the value 3.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Pass by reference&lt;/strong&gt; is variable assignment that copies a reference to a value. Sleep uses references to share values between multiple scalars. Changes to one reference affect all scalars that reference the same data. This allows efficient use of computer memory for complex values. Sleep passes array, hash, and object values by reference.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;# create a new java.lang.StringBuffer object
+$a = [new StringBuffer: &quot;hello&quot;];
+
+# assign a reference to the StringBuffer in $a to $b
+$b = $a;
+
+# append &quot; world!&quot; to the StringBuffer
+[$b append: &quot; world!&quot;];
+
+println($a);
+println($b);
+
+hello world!
+hello world!&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;admonitionblock warning&quot;&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td class=&quot;icon&quot;&gt;
+&lt;i class=&quot;fa icon-warning&quot; title=&quot;Warning&quot;&gt;&lt;/i&gt;
+&lt;/td&gt;
+&lt;td class=&quot;content&quot;&gt;
+What does the pound sign represent?
+Sleep uses the pound sign for comments. Sleep interprets anything following a pound sign up to the end of a line as a comment. The parser strips away comments. Comments are a tool to let you document your programs.
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Getting ahead of ourselves, this example creates an object value and assigns it to $a. I then assign the object value in $a to $b. Sleep uses pass by reference since $a holds an object value. The next line appends the string &quot; world!&quot; to $b. The scalars $a and $b reference the same object. When the script prints out $a and $b the same result is shown for each.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I hope this discussion clarified variables (scalars), types, and means of passing them. In the future I will speak of scalars and types as the same entity. From now on read the phrase string scalar as: &quot;A scalar container that holds a Sleep string value.&quot;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;expressions&quot;&gt;Expressions&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;You can assign the results of an operation to a scalar. An operation is an operator surrounded by two values. For example 2 + 3 is the + operator applied to the values 2 and 3. Here are some valid operations:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$x = 5 + &quot;1&quot;;
+$x = 5 - $y;
+$x = $x * $2;
+$x = $z / 9.9;
+$x = $1 % 3; # modulus
+$x = $1 ** 4; # exponentation&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;These operations work on numbers. There are operators for strings as well.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$x = &quot;Ice&quot; . &quot;cream&quot;;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This example joins two strings with the string concatenation operator. $x has the string value: &quot;Icecream&quot;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$x = &quot;abc&quot; x 3;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This example shows the string multiplication operator. This operator repeats the left operand as set by the right operand.
+Here &lt;strong&gt;$x&lt;/strong&gt; is &quot;abcabcabc&quot; or &quot;abc&quot; repeated 3 times.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Combine multiple operators to form an expression.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$z = 5 + 1 * 3;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This example is valid. The plus, minus, and period (string concatenation) have lower precedence than multiplication, division, and modulus. This expression is equal to:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$z = 5 + (1 * 3);&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Parentheses define which expression to evaluate first.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$z = 3 * ($x % 3) - (ticks() / (10000 + 1));&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;assignment_operations&quot;&gt;Assignment Operations&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep supports a special assignment form called an assignment operator. An assignment operator combines operation on a scalar and assignment into a single step.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$x = 4;
+$x += 3;
+println($x);
+7&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;$x += 3 is the same as $x = $x + 3. Assignment operations are faster as they are less work for the Sleep interpreter. These are valid assignment operations: +=, -=, *=, /=, &amp;amp;=, |=, ^=, &amp;lt;&amp;#8656;, &amp;gt;&amp;gt;=, and .=.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;mandated_whitespace&quot;&gt;Mandated Whitespace&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep scripts expect white space in expressions. Many languages allow you to get away with little white space. The following is valid in Perl:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$x=1+2;
+Error: Syntax error at line 1
+       $x=1+2&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep does not know what to do with the statement above and as you can see it reports a syntax error. Your scripts must use white space between operators and their operands.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$x = 1 + 2;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Think of this as a feature that forces reasonable coding habits.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;admonitionblock warning&quot;&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td class=&quot;icon&quot;&gt;
+&lt;i class=&quot;fa icon-warning&quot; title=&quot;Warning&quot;&gt;&lt;/i&gt;
+&lt;/td&gt;
+&lt;td class=&quot;content&quot;&gt;
+Why is white space needed?
+Sleep is an extensible language. Sleep extensions (bridges) provide all the operations such as addition and subtraction. The Sleep parser does not know about these operators when it is parsing your script. The only way it knows an operator is an operator is by the context.
+Out of guilt I did add a hack to make Sleep recognize the string concatenation operator (a period) with or without white space. When I was in a Perl hacking mind-set I kept receiving parser errors because of my lack of whitespace around this operator. When I added this hack, I was already placing whitespace into my string concatenation operations. I managed to get over it.
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;scalar_types&quot;&gt;Scalar Types&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep has many value types. This section summarizes them.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;string_scalars&quot;&gt;String Scalars&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A string is a sequence of characters also know as arbitrary text. Any value may convert to a string. The integer 3 is equal to the string &quot;3&quot;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$var = &quot;This is some arbitrary text&quot;;
+println($var);
+
+This is some arbitrary text&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;numerical_scalars&quot;&gt;Numerical Scalars&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep has several number types. This chapter discusses them later.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$x = 3; # integer
+$y = 3.4; # double
+$z = 45L; # long (64bit integer)&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;arrays&quot;&gt;Arrays&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Arrays are a scalar that contain multiple values. Arrays store their values in numerical order. You may recall an array value by position.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;@foo = @(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;);
+$x = @foo[1] #$x is now &quot;b&quot;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;hash_scalars&quot;&gt;Hash Scalars&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Hashes hold multiple values as well. Hashes act like dictionaries. You can store and lookup values by keyword.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;%bar = %(x =&amp;gt; &quot;x-ray&quot;, y =&amp;gt; &quot;yabboes&quot;);
+$x = %bar[&quot;y&quot;]; # $x is now &quot;yabboes&quot;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;object_scalars&quot;&gt;Object Scalars&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep scalars may refer to Java objects. The function &amp;amp;openf creates an object holding the file handle. Sleep&amp;#8217;s input and output functions know how to work with this handle object.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$handle = openf(&quot;hello.txt&quot;);
+# call the readln function on the object scalar
+# that references a file handle for hello.txt
+$text = readln($handle);&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;You can also create Java objects through object expressions. Earlier you saw the pass by reference example create a java.lang.StringBuffer object. Chapter 7 covers this topic in-depth.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;function_scalars&quot;&gt;Function Scalars&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep functions are first class types. You can assign them to variables, pass them as parameters to functions, and all that other fun stuff. A function scalar is an object scalar that references a sleep.bridges.SleepClosure object.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;the_mysterious_null&quot;&gt;The mysterious $null&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;$null is the null scalar. The null scalar is equal to nothingness. You cannot assign a value to $null.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;$null is equal to the number 0. As a string $null is equal to the empty string &quot;&quot;. As an object $null is the same as the Java value null. Use the is predicate to check if a scalar is $null.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$ java -jar sleep.jar
+&amp;gt;&amp;gt; Welcome to the Sleep scripting language
+&amp;gt; ? $null eq &quot;&quot;
+true
+&amp;gt; ? $null is &quot;&quot;
+false
+&amp;gt; ? $null is 0
+false
+&amp;gt; ? $null is $null
+true&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;scalar_descriptions&quot;&gt;Scalar Descriptions&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Many of Sleep&amp;#8217;s built-in debugging and runtime warning messages provide a description of your data. Knowing scalar descriptions will help you decipher what Sleep is telling you about your program behavior. This table summarizes the descriptions that Sleep uses for each type:&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;caption class=&quot;title&quot;&gt;Table 1. Scalar Descriptions&lt;/caption&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Type&lt;/th&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Example&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;String&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;'some value'&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Integer&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;3&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Long&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;4L&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Double&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.4&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Object&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;&amp;#8230;&amp;#8203;&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Array&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;@(&amp;#8230;&amp;#8203;)&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Hash&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;%(&amp;#8230;&amp;#8203;)&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Key/Value Pair&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;key &amp;#8658; value&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Closure&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;&amp;amp;closure[script.sl:3-5]#4&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Null Scalar&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;$null&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Use the &amp;amp;typeOf function to find out the type of a scalar.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$long = 4L;
+$double = 3.5;
+$result = $long + $double; # what is the result?
+println(&quot;Type of result is: &quot; . typeOf($result));&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Type of result is: class sleep.engine.types.DoubleValue&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect3&quot;&gt;
+&lt;h4 id=&quot;2_2_numbers&quot;&gt;2.2 Numbers&lt;/h4&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep supports three types of scalars for numbers. Whole numbers such as -1, 0, 1, 2 &amp;#8230;&amp;#8203; 65536 are integer values. Double values have a decimal in them such as 3.0, 1.1, 0.55556. This example assigns a double value to a scalar:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$Pi = 3.1415926535;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;You can use the hexadecimal form to specify integers. A hexadecimal number begins with 0x.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$var = 0xFF; # same as $var = 255&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep also supports octal literals. A number that begins with a leading zero is an octal number.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$oct = 077; # same as $var = 63&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A long is a higher capacity integer. Integer scalars use 32 bits. Longs use 64. An integer can represent a whole number between -2,147,483,648 to +2,147,483,64. A long has a larger capacity.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Add an L to the end of a number to declare a long. For example, 12345L is a long scalar. The L accepts hex and octal literals as well.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Use &amp;amp;formatNumber and &amp;amp;parseNumber to format and parse numbers in other bases.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;increment_and_decrement_operators&quot;&gt;Increment and Decrement Operators&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep has a special operator for integer scalars. Instead of typing&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$x = $x + 1;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;You can use the increment operator on the scalar $x.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$x++;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The two are equivalent. $x++ increments the value of $x and returns $x + 1. The decrement operator works similiarly except it subtracts rather than adds. $x-- decrements the value of $x and returns $x - 1.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;useful_constants&quot;&gt;Useful Constants&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The Java class library contains several numerical constants. Use an object expression to access them. PI is available as [Math PI] and E is available as [Math E]. These constructs return double scalars.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;# show off mathematical constants.
+
+$Pi = [Math PI];
+println(&quot;Pi is $Pi&quot;);
+
+$E  = [Math E];
+println(&quot;E  is $E&quot;);
+
+Pi is 3.141592653589793
+E  is 2.718281828459045&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This table shows the operators available for manipulating number scalars.&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;caption class=&quot;title&quot;&gt;Table 2. operators&lt;/caption&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Operator&lt;/th&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;*&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;multiplication&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;/&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;division&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;+&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;addition&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;-&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;subtraction&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;%&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;modulus; remainder operator&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;**&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;exponentation&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;&amp;lt;=&amp;gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;numerical comparison&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The multiplication and division operators have a higher precedence than all other operators. For bit twiddling Sleep provides the following operators:&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Operator&lt;/th&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;&amp;lt;&amp;lt;&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;left shift&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;&amp;gt;&amp;gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;right shift&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;^&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;exclusive or&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;&amp;amp;&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;and&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;|&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;or&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;not($x)&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;negates $x&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Logical operators are only valid on scalar longs and ints. Sleep will do its best to convert other types to a fitting int value.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;conversion_of_scalars&quot;&gt;Conversion of Scalars&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;When performing a numerical operation or comparison on different types a conversion will occur. For example, Sleep will convert an operand to a double if the other operand is a double. The result of this operation is a double as well. A similar process occurs for longs. Integers have the lowest conversion priority.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Use casting functions to force a scalar to a certain type.&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;caption class=&quot;title&quot;&gt;Table 3. force a scalar to a certain type&lt;/caption&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Function&lt;/th&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;double($x)&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;returns the value of $x as a double scalar&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;long($x)&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;returns the value of $x as a long scalar&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;int($x)&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;returns the value of $x as a int scalar&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;More sophisticated casting exists for the purpose of interacting with Java. Chapter 7 introduces these.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;time_and_date_values&quot;&gt;Time and Date Values&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep scripts can work with date and time values. Sleep stores date and time values as a long with the number of milliseconds since the epoch. Sleep&amp;#8217;s epoch is midnight, January 1st, 1970. Sleep uses this millisecond form instead of a string representation.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &amp;amp;formatDate and &amp;amp;parseDate functions expect a datetime format string. &amp;amp;formatDate formats a date and time value into a string representation. The &amp;amp;parseDate creates a date and time value from a string representation and a datetime format.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A datetime format specifies a template of a date and time string representation. Sleep interprets unquoted letters from 'A' to 'Z' and 'a' to 'z' in the pattern as parts of a date or time template. Avoid this interpretation by surrounding text with single quotes. For example 'at' represents the word at.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The following pattern letters are available (Java currently reserves other characters):&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;caption class=&quot;title&quot;&gt;Table 4. pattern letters&lt;/caption&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 33.3333%;&quot;&gt;
+&lt;col style=&quot;width: 33.3333%;&quot;&gt;
+&lt;col style=&quot;width: 33.3334%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Letter&lt;/th&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Description&lt;/th&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Examples&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;G&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Era designator&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;AD&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;y&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Year&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;2004 ; 04&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;M&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Month in year&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;October ; Oct ; 10&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;w&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Week in year&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;27&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;W&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Week in month&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;2&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;D&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Day in year&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;127&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;d&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Day in month&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;10&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;F&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Day of week in month&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;2&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;E&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Day in week&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Monday ; Mon&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;a&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Am/pm marker&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;PM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;H&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Hour in day (0-23)&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;0&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;k&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Hour in day (1-24)&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;24&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;K&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Hour in am/pm (0-11)&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;0&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;h&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Hour in am/pm (1-12)&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;11&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;m&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Minute in hour&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;34&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;s&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Second in minute&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;52&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;S&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Millisecond&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;745&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;z&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Time zone&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Eastern Standard Time ;EST ;GMT-04:00&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Z&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Time zone&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;-0400&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Repeat pattern letters to specify the exact presentation. For example 'E' is the day of week pattern letter. 'EEE' refers to the short form of the day of the week such as Weds. 'EEEE' refers to the long form such as Wednesday. Another example: 'yy' will truncuate the year to 2 digits.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &amp;amp;ticks function returns the current time in milliseconds since the epoch. This example shows date formatting and parsing in action:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;# lets do a little 'date' arithmetic
+$event = &quot;14/Oct/2006:12:24:00 -0500&quot;;
+$a = parseDate('dd/MMM/yyyy:kk:mm:ss Z',$event);
+$now = &quot;2006.10.14 at 13:40:00 EDT&quot;;
+$b = parseDate(&quot;yyyy.MM.dd 'at' HH:mm:ss z&quot;, $now);
+# keep in mind we are dealing with milliseconds
+# i.e. 60 * 1000 = 1 minute
+$diff = $b - $a;
+println(&quot;event occured &quot; . ($diff / 60000) . &quot; minutes ago&quot;);
+# subtract the difference from our &quot;now&quot; value
+$when = $b - $diff;
+println(&quot;event occured &quot; . formatDate($when, &quot;yyyy.MM.dd 'at' HH:mm:ss z&quot;));&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;event occured 16 minutes ago
+event occured 2006.10.14 at 13:24:00 EDT&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect3&quot;&gt;
+&lt;h4 id=&quot;2_3_strings&quot;&gt;2.3 Strings&lt;/h4&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep strings come in two varieties. Literals and parsed literals. A literal string is a string where what you type is exactly what you get.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$flavor = &quot;mint chocolate chip&quot;;
+println('I love $flavor $+ !!!');&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;I love $flavor $+ !!!&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Enclose literal strings in single quotes. Pay special attention to which types of quotes you use as there is a difference between literal strings and parsed literal strings.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect4&quot;&gt;
+&lt;h5 id=&quot;parsed_literals&quot;&gt;Parsed Literals&lt;/h5&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Parsed literal strings replace $scalar variables with their value. Enclose parsed literal strings with double quotes.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$flavor = &quot;mint chocolate chip&quot;;
+println(&quot;I love $flavor $+ !!!&quot;);&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;I love mint chocolate chip!!!&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Parsed literals only evaluate variables beginning with a $ sign. Surround variables with whitespace to allow the parsed literal to extract the variable name. The $+ value acts as a concatenation operator to remove unwanted whitespace within parsed literals.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$super = &quot;Super&quot;;
+$mang = &quot;man&quot;;
+
+println(&quot;Oh no! Where is $super $+ $mang $+ ???&quot;);&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Oh no! Where is Superman???&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Wait, there&amp;#8217;s more. Parsed literals also support built-in formatting for scalars.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$first = &quot;First&quot;;
+$last  = &quot;Last&quot;;
+$worth = &quot;Worth&quot;;
+
+println(&quot;$[10]first $[10]last $[-6]worth&quot;);
+println(&quot;-&quot; x 28);
+
+$first = &quot;John&quot;;
+$last  = &quot;Doe&quot;;
+$worth = &quot;12K&quot;;
+
+println(&quot;$[10]first $[10]last $[-6]worth&quot;);
+
+$first = &quot;John&quot;;
+$last  = &quot;Deer&quot;;
+$worth = &quot;-45K&quot;;
+
+println(&quot;$[10]first $[10]last $[-6]worth&quot;);
+
+First      Last        Worth
+----------------------------
+John       Doe           12K
+John       Deer         -45K&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The built-in formatting aligns values to a set number of spaces. Specify the number within square brackets. By default, Sleep pads the value with spaces to the right. If you specify a negative number, the interpreter pads with spaces to the left.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;You may also use an expression within the square brackets.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Escape characters within a parsed literal with the back slash character. The interpreter ignores the character immediately following a back slash. The interpreter also removes the initial backslash during processing. Some escaped characters have special meanings.&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;caption class=&quot;title&quot;&gt;Table 5. Escape characters&lt;/caption&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Escape&lt;/th&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;\n&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;newline character&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;\r&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;return character&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;\t&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;tab character&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;\u####&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;16 bit unicode character i.e. &quot;\u0063&quot; is &quot;c&quot;&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;\x##&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;8 bit character i.e. &quot;\x6A&quot; is &quot;j&quot;&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;\\&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;back slash \ character&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep provides these operations for use with Strings.&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;caption class=&quot;title&quot;&gt;Table 6. operations for use with Strings&lt;/caption&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Operator&lt;/th&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;.&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;concatenation&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;x&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;string multiplication (i.e. &quot;a&quot; x 3 = &quot;aaa&quot;)&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;cmp&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;string comparison&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Sleep has numerous functions that parse and manipulate strings. &amp;amp;left and &amp;amp;right extract left most and right most characters. &amp;amp;substr and &amp;amp;mid extract substrings from a string. &amp;amp;split breaks a string up into tokens with a delimiter and &amp;amp;join puts it back together again. &amp;amp;replaceAt and &amp;amp;strrep substitute substrings for other strings. And &amp;amp;strlen is used to find out the length of a string.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$ java -jar sleep.jar
+&amp;gt;&amp;gt; Welcome to the Sleep scripting language
+&amp;gt; x strlen(&quot;this is a test&quot;)
+14
+&amp;gt; x split(&quot; &quot;, &quot;this is a test&quot;)
+@('this', 'is', 'a', 'test')
+&amp;gt; x replaceAt(&quot;this is a test&quot;, &quot;is not&quot;, 5, 2)
+this is not a test
+&amp;gt; x uc(&quot;this is a ...&quot;)
+THIS IS A ...&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Many string functions allow the use of negative indices when specifying a character position. Sleep adds a negative index to the string length to obtain the real offset.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;&amp;gt; x substr(&quot;this is a test!!&quot;, -6, -2)
+test
+&amp;gt; x indexOf(&quot;this is a test!!&quot;, &quot;s&quot;, -6)
+12
+&amp;gt; x charAt(&quot;this is a test!!&quot;, -4)
+s&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content><author><name>Jiffy</name></author><category term="java" /><category term="sleep" /><summary type="html">Sleep is a Java-based scripting language heavily inspired by Perl. Sleep started out as a weekend long hack fest in April 2002. When nothing like Perl was available to build a scriptable Internet Relay Chat client, I set out to build the scripting language I wanted.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/jirciiWIN.jpg" /></entry></feed>

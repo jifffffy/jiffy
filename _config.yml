@@ -1,4 +1,5 @@
 title: Jekyll AsciiDoc Blog
+destination: ./docs
 description: The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on GitHub with content based in AsciiDoc.
 exclude:
   - vendor

@@ -1,6 +1,7 @@
 :page-title: Converting A Virtual Image To A Physical Machine
-:page-author: Eladio Martinez
+:page-author: Jiffy
 :page-avatar: devlopr.png
+:page-image: 20200529/image007.jpg
 :page-category: guides
 :page-tags: [ Virtual ]
 :page-excerpt: This tutorial shows how to convert an existing CentOS VM to a Physical machine. This tutorial covers the cloning of the VM to an unpartitioned HDD and troubleshoot some of the possible errors that you may have booting the OS on your new hardware. To illustrate this procedure I will use VMware Workstation 7 as the handler to transfer the VM installation to a physical HDD.
