@@ -1,0 +1,56 @@
+:page-title: Converting A Virtual Image To A Physical Machine
+:page-author: Eladio Martinez
+:page-avatar: devlopr.png
+:page-category: guides
+:page-tags: [ Virtual ]
+:page-excerpt: This tutorial shows how to convert an existing CentOS VM to a Physical machine. This tutorial covers the cloning of the VM to an unpartitioned HDD and troubleshoot some of the possible errors that you may have booting the OS on your new hardware. To illustrate this procedure I will use VMware Workstation 7 as the handler to transfer the VM installation to a physical HDD.
+
+= Tutorial
+
+== 1、Requirements
+
+To perform this procedure you will need:
+
+- VMware Workstation, VMware Server or VMware Player.
+- CloneZilla ISO image.
+- Unpartitioned HDD with enough space to hold your VM image.
+
+== 2、Preliminary Notes
+
+This tutorial assumes basic knowledge of the cloning process and requires no previous experience on the use of Clonezilla. Make sure your OS is not using in any way the target HDD that will hold your final copy of the VM, otherwise VMware will complain about your disk been in use and CloneZilla will not perform a successful copy of the VM.
+
+== 3、VMware Configuration
+
+First thing is to make sure your virtual CD/DVD is using your CloneZilla ISO image to boot. Next add your physical HDD as part of your existing VM by clicking the Add button.
+
+image::/assets/images/20200529/image001.jpg[]
+
+Select `Hard Drive` and click `Next`.
+
+image::/assets/images/20200529/image003.jpg[]
+
+Select `Use physical disk (for advanced users)` then click `Next`.
+
+image::/assets/images/20200529/image004.jpg[]
+
+Make sure you select the correct drive that you want to use for your physical disk and select the option `Use entire disk`.
+
+image::/assets/images/20200529/image005.jpg[]
+
+Finally give a name to your configuration file then click `Finish`.
+
+image::/assets/images/20200529/image006.jpg[]
+
+Make sure your final VMware hardware list include this two elements otherwise, start all over.
+
+image::/assets/images/20200529/image007.jpg[]
+
+== 4、Another way
+
+- Copy the .vmdk virtual disk of the VM.
+
+- Convert it from vmdk to raw format using the qemu-img tool C:\Tools\qemu-img>qemu-img convert -f vmdk G:\VM\Streamer1.vmdk -O raw G:\Streamer1.raw
+
+- Write the raw file to the physical HD (on windows system you can use Win32 Disk Imager)
+
+The HD will now contain all partitions and data initially stored in the .vmdk disk, put and boot in the physical machine.
