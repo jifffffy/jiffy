@@ -8,7 +8,7 @@
 
 = Tutorial
 
-== 1、Requirements
+== 1.Requirements
 
 To perform this procedure you will need:
 
@@ -16,11 +16,11 @@ To perform this procedure you will need:
 - CloneZilla ISO image.
 - Unpartitioned HDD with enough space to hold your VM image.
 
-== 2、Preliminary Notes
+== 2.Preliminary Notes
 
 This tutorial assumes basic knowledge of the cloning process and requires no previous experience on the use of Clonezilla. Make sure your OS is not using in any way the target HDD that will hold your final copy of the VM, otherwise VMware will complain about your disk been in use and CloneZilla will not perform a successful copy of the VM.
 
-== 3、VMware Configuration
+== 3.VMware Configuration
 
 First thing is to make sure your virtual CD/DVD is using your CloneZilla ISO image to boot. Next add your physical HDD as part of your existing VM by clicking the Add button.
 
@@ -46,7 +46,7 @@ Make sure your final VMware hardware list include this two elements otherwise, s
 
 image::/assets/images/20200529/image007.jpg[]
 
-== 4、Another way
+== 4.Another way
 
 - Copy the .vmdk virtual disk of the VM.
 

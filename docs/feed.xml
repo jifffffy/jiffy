@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-29T15:41:26+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jekyll AsciiDoc Blog</title><subtitle>The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on GitHub with content based in AsciiDoc.</subtitle><entry><title type="html">Converting A Virtual Image To A Physical Machine</title><link href="http://localhost:4000/guides/2020/05/29/v2p.html" rel="alternate" type="text/html" title="Converting A Virtual Image To A Physical Machine" /><published>2020-05-29T00:00:00+08:00</published><updated>2020-05-29T00:00:00+08:00</updated><id>http://localhost:4000/guides/2020/05/29/v2p</id><content type="html" xml:base="http://localhost:4000/guides/2020/05/29/v2p.html">&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;1requirements&quot;&gt;1、Requirements&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-29T15:54:22+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jekyll AsciiDoc Blog</title><subtitle>The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on GitHub with content based in AsciiDoc.</subtitle><entry><title type="html">Converting A Virtual Image To A Physical Machine</title><link href="http://localhost:4000/guides/2020/05/29/v2p.html" rel="alternate" type="text/html" title="Converting A Virtual Image To A Physical Machine" /><published>2020-05-29T00:00:00+08:00</published><updated>2020-05-29T00:00:00+08:00</updated><id>http://localhost:4000/guides/2020/05/29/v2p</id><content type="html" xml:base="http://localhost:4000/guides/2020/05/29/v2p.html">&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;1_requirements&quot;&gt;1.Requirements&lt;/h2&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;To perform this procedure you will need:&lt;/p&gt;
@@ -20,7 +20,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;2preliminary_notes&quot;&gt;2、Preliminary Notes&lt;/h2&gt;
+&lt;h2 id=&quot;2_preliminary_notes&quot;&gt;2.Preliminary Notes&lt;/h2&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;This tutorial assumes basic knowledge of the cloning process and requires no previous experience on the use of Clonezilla. Make sure your OS is not using in any way the target HDD that will hold your final copy of the VM, otherwise VMware will complain about your disk been in use and CloneZilla will not perform a successful copy of the VM.&lt;/p&gt;
@@ -28,7 +28,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;3vmware_configuration&quot;&gt;3、VMware Configuration&lt;/h2&gt;
+&lt;h2 id=&quot;3_vmware_configuration&quot;&gt;3.VMware Configuration&lt;/h2&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;First thing is to make sure your virtual CD/DVD is using your CloneZilla ISO image to boot. Next add your physical HDD as part of your existing VM by clicking the Add button.&lt;/p&gt;
@@ -81,7 +81,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;4another_way&quot;&gt;4、Another way&lt;/h2&gt;
+&lt;h2 id=&quot;4_another_way&quot;&gt;4.Another way&lt;/h2&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;ulist&quot;&gt;
 &lt;ul&gt;
