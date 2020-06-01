@@ -6,7 +6,7 @@ layout: default
         <div class="detailcon">
             {% assign authors = site.authors |  where: 'name', page.author  %}
             <a title="{{ page.title }}" href="{{ authors.first.url}}" class="detailuser">
-                <img alt="{{ page.title }}" src="/assets/images/users/{{ page.avatar }}">
+                <img alt="{{ page.title }}" src="{{ site.baseurl }}/assets/images/users/{{ page.avatar }}">
                 <span>
                     <font class="username">{{ page.author }}</font>
                     <font class="date">{{ page.date | date_to_string }}</font>

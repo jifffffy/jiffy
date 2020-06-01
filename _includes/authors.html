@@ -4,7 +4,7 @@
         {% for author in site.authors limit:12 %}
         <li>
             <a  href="{{ author.url}}" title="{{ author.title }}">
-                <img alt="{{ author.title }}" src="/assets/images/users/{{ author.avatar }}">
+                <img alt="{{ author.title }}" src="{{ site.baseurl }}/assets/images/users/{{ author.avatar }}">
                 <span>
                     <font class="username">{{ author.name }}</font>
                     <font class="userdes">{{ author.summary }}</font>
