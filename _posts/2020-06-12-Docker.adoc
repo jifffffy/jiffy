@@ -3,8 +3,8 @@
 :page-avatar: devlopr.png
 :page-image: docker.jpg
 :page-category: guides
-:page-tags: [ Windows Docker ]
-:page-excerpt: 记录学习<<Docker for Rails developers>>时遇到的一些问题。
+:page-tags: [ Windows Docker Rails Ruby]
+:page-excerpt: 记录学习《Docker for Rails developers》时遇到的一些问题。
 
 = 教程
 
@@ -25,34 +25,25 @@
 
 **注意:** 由于众所周知的原因,下载这个文件极有可能失败,引用知乎上的解决方法：
 
----
-
+----
 目前国内访问github的体验, 首先http://github.com里的各种页面访问都没问题, 速度还好.
 release中的下载链接虽然是http://github.com开头,但会跳转到*.s3.amazonaws.com这个域名, 后面带了很长的参数, 貌似是一次性的只能临时下载用, 很快就会失效,
 然后只能从github.com开头的地址重新跳转取得新的实际下载链接.
 至于release的下载速度, 最快只有几十KB/s, 慢的时候可能掉到十几K甚至几K. 如果把跳转后的真实下载链接中的https手动改为http开头, 则下载速度会提高到几百K甚至更高. 怀疑是https有墙在阻碍.
 然而, release下载的稳定性并不好, 如果下载文件很大, 很容易在中途中断(http方式下载还经常在99%的进度中断), chrome浏览器无法断点续传, 因为临时下载地址会失效. 不少下载工具也无法处理好地址跳转,
 不过curl实测可以从http://github.com开头的原链接断点续传, 但又无法解决https改为http, 只能龟速下载但中断可续传.
+----
 
----
-
-采用把https换成http的方式下载boot2docker.iso文件，下载完成后，放到C:\Users\用户\.docker\machine\cache目录下。然后再点击"Docker Quickstart Terminal"快捷方式。
+采用把**https**换成**http**的方式下载boot2docker.iso文件，下载完成后，放到C:\Users\用户\.docker\machine\cache目录下。然后再点击"Docker Quickstart Terminal"快捷方式。
 
 == 执行
 
 在执行命令的时候,由于windows对斜杠的反人类设计,会造成很多困扰,如:
 在linux下应该为:
-
----
-
+----
 $ ​​docker​​ ​​run​​ ​​-i​​ ​​-t​​ ​​--rm​​ ​​-v​​ ​​${PWD}:/usr/src/app​​ ​​ruby:2.6​​ ​​bash​
-
----
-
+----
 下windows下却为:
-
----
-
+----
 $ ​​docker​​ ​​run​​ ​​-i​​ ​​-t​​ ​​--rm​​ ​​-v​​ /${PWD}://usr/src/app​​ ​​ruby:2.6​​ ​​bash​
-
----
+----
