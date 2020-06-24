@@ -52,6 +52,88 @@ $ ​​docker​​ ​​run​​ ​​-i​​ ​​-t​​ ​​--rm​
 
 由于众所周知的原因,在下载gem包的时候,需要设置国内的镜像源:
 ----
-gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/  \
-    && bundle config mirror.https://rubygems.org https://gems.ruby-china.com
+gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/  && bundle config mirror.https://rubygems.org https://gems.ruby-china.com
 ----
+
+== Docker
+
+获取container IP地址:
+----
+​​$ ​​docker​​ ​​ps​
+  ​ CONTAINER ID IMAGE more info
+  ​ d7230c4b0595 e28cf982ae39 .........
+
+​$ ​​docker​​ ​​inspect​​ ​​--format​​ ​​'{{ .NetworkSettings.IPAddress }}'​​ ​​d7230c4b0595​
+   172.17.0.2
+----
+
+=== Docker compose
+
+执行流程：
+
+ - Creates a separate network just for the app:
+
+`Creating network "myapp_default" with the default driver`
+
+NOTE: By convention, Compose names the network <appname>_default , where appname is
+      inferred from the containing directory.
+
+ - Creates any non-locally mounted volumes defined for the app
+ - Builds an image for any services with a build directive
+----
+Building web
+​ Step 1/8 : FROM ruby:2.6
+​ ​ --->​​ ​​f28a9e1d0449​
+​ Step 2/8 : LABEL maintainer="rob@DockerForRailsDevelopers.com"
+​ ​ --->​​ ​​Using​​ ​​cache​
+​ ​ --->​​ ​​d69ea7d90f89​
+​ Step 3/8 : RUN apt-get update -yqq && apt-get install -yqq --no-install-
+​ recommends nodejs
+​ ​ --->​​ ​​Using​​ ​​cache​
+​ ​ --->​​ ​​463750079bef​
+​ ...
+​ Step 8/8 : CMD ["bin/rails", "s", "-b", "0.0.0.0"]
+​ ​ --->​​ ​​Running​​ ​​in​​ ​​b11e989011fc​
+​ Removing intermediate container b11e989011fc
+​ ​ --->​​ ​​a18b3079c84b​
+​ Successfully built a18b3079c84b
+----
+Compose gives the image a name and version by tagging it:
+----
+Successfully tagged myapp_web:latest
+----
+NOTE: using the convention <appname>_<service_name>:latest , again inferring the appname
+      from the enclosing directory. In our case, this becomes myapp_web:latest
+
+WARNING: Image for service web was built because it did not already exist.
+  ​ To rebuild this image you must use `docker-compose build` or `docker-compose
+  ​ up --build`.
+
+ - Creates a container for each service
+
+`Creating myapp_web_1 ... done`
+
+NOTE: Compose creates and starts a single container for our web service based on
+      the image it has just created. It will name containers using the format
+      `<appname>_<service name>_<n>`.
+
+ - Launches a container per service
+
+`Attaching to myapp_web_1`
+
+NOTE: In a process known as attaching, Compose then connects our local IO streams
+     ( stdin , stdout , and stderr ) to the running container
+
+As a result, we’re able to see our Rails server starting inside the container:
+----
+web_1 | => Booting Puma
+​ web_1 | => Rails 5.2.2 application starting in development
+​ web_1 | => Run `rails server -h` for more startup options
+​ web_1 | Puma starting in single mode...
+​ web_1 | * Version 3.12.0 (ruby 2.6.0-p0), codename: Llamas in Pajamas
+​ web_1 | * Min threads: 5, max threads: 5
+​ web_1 | * Environment: development
+​ web_1 | * Listening on tcp://0.0.0.0:3000
+​ web_1 | Use Ctrl-C to stop
+----
+
