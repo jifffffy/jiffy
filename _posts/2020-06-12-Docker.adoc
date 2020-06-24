@@ -38,12 +38,20 @@ release中的下载链接虽然是http://github.com开头,但会跳转到*.s3.am
 
 == 执行
 
-在执行命令的时候,由于windows对斜杠的反人类设计,会造成很多困扰,如:
+在执行命令的时候,由于windows的路径问题,需要特别注意,另外在共享主机目录的时候,需要写绝对路径,如:
 在linux下应该为:
 ----
 $ ​​docker​​ ​​run​​ ​​-i​​ ​​-t​​ ​​--rm​​ ​​-v​​ ​​${PWD}:/usr/src/app​​ ​​ruby:2.6​​ ​​bash​
 ----
 下windows下却为:
 ----
-$ ​​docker​​ ​​run​​ ​​-i​​ ​​-t​​ ​​--rm​​ ​​-v​​ /${PWD}:/usr/src/app​​ ​​ruby:2.6​​ ​​bash​
+$ ​​docker​​ ​​run​​ ​​-i​​ ​​-t​​ ​​--rm​​ ​​-v​​ /c/Users/sun/test:/usr/src/app​​ ​​ruby:2.6​​ ​​bash​
+----
+
+== Ruby
+
+由于众所周知的原因,在下载gem包的时候,需要设置国内的镜像源:
+----
+gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/  \
+    && bundle config mirror.https://rubygems.org https://gems.ruby-china.com
 ----
