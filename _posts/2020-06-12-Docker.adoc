@@ -71,7 +71,7 @@ gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/  &
 
 执行流程：
 
- - Creates a separate network just for the app:
+ . Creates a separate network just for the app:
 
 `Creating network "myapp_default" with the default driver`
 
@@ -137,3 +137,37 @@ web_1 | => Booting Puma
 ​ web_1 | Use Ctrl-C to stop
 ----
 
+==== Docker 生命周期
+
+image::/assets/images/20200612/life_cycle.jpg[]
+
+==== Running One-Off Commands
+
+ . docker-compose run
+
+ $ ​​docker-compose​​ ​​run​​ ​​--rm​​ ​​web​​ ​​echo​​ ​​'ran a different command'​
+ ran a different command
+
+ .  docker-compose exec
+
+ $ ​​docker-compose​​ ​​exec​​ ​​web​​ ​​echo​​ ​​'ran a different command'​
+ ran a different command
+
+
+==== Cleaning Up
+
+ . `docker-compose down` command stops any running containers and
+   removes them along with the app’s dedicated network and volumes.
+
+ . If you just want to remove the app’s containers, there’s the
+   `docker-compose rm` command for this purpose.
+
+
+WARNING: As we change our Dockerfile and rebuild images, some images
+         inevitably will no longer be needed or used, yet sit there taking up
+         precious disk space. These are known as dangling images; they can
+         be removed with the `docker image prune` command.
+         There’s an entire family of prune commands to free up other unused
+         resources (for example, `docker container prune` ). There’s even a
+         single command to free up all resources in one go:
+         `$ docker system prune`
