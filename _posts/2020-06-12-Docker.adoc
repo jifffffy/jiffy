@@ -45,5 +45,5 @@ $ ​​docker​​ ​​run​​ ​​-i​​ ​​-t​​ ​​--rm​
 ----
 下windows下却为:
 ----
-$ ​​docker​​ ​​run​​ ​​-i​​ ​​-t​​ ​​--rm​​ ​​-v​​ /${PWD}://usr/src/app​​ ​​ruby:2.6​​ ​​bash​
+$ ​​docker​​ ​​run​​ ​​-i​​ ​​-t​​ ​​--rm​​ ​​-v​​ /${PWD}:/usr/src/app​​ ​​ruby:2.6​​ ​​bash​
 ----
