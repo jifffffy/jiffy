@@ -1,0 +1,72 @@
+:page-title: 门磁测试
+:page-author: Jiffy
+:page-avatar: devlopr.png
+:page-image: zoom.jpg
+:page-category: guides
+:page-tags: [ test]
+:page-excerpt: 门磁传感器测试
+
+=== 门
+
+[cols="2,1,1", options="header"]
+.后开
+|===
+|操作 |信号 |状态
+
+|打开前门,关闭后门
+|1,2
+|1,1
+
+|关闭前门
+|1,2
+|0,0
+
+|===
+
+[cols="2,1,1", options="header"]
+.前开
+|===
+|操作 |信号 |状态
+
+|打开前门
+|1,2
+|1,0
+
+|关闭前门
+|1,2
+|0,0
+|===
+
+=== 锁
+[cols="2,1,1", options="header"]
+.锁
+|===
+|操作 |信号 |状态
+
+|打开门锁
+|9
+|0
+
+|关闭门锁
+|9
+|1
+
+|钥匙向右旋转一点,不要拔出钥匙
+|9
+|1
+|===
+
+=== 安全门
+[cols="2,1,1", options="header"]
+.保险柜门
+|===
+|操作 |信号 |状态
+
+|关闭安全门
+|8
+|0
+
+|打开安全门
+|8
+|1
+|===
