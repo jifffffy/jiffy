@@ -1,0 +1,81 @@
+:page-title: The “Ops” in DevOps
+:page-author: Jiffy
+:page-avatar: devlopr.png
+:page-image: zoom.jpg
+:page-category: guides
+:page-tags: [ ops ]
+:page-excerpt: Our focus as software developers is often on the development phase, with its discovery, analysis, testing, and building activities.
+
+== The “Ops” in DevOps
+
+Depending on your work environment, you may or may not be heavily involved in operations—or just Ops—which involves delivering and
+running software in production. We can break this down into a number of different areas:
+
+. Provisioning
+. Configuration management
+. Release management
+. Monitoring and alerting
+. Operating
+
+Although you probably have some idea of what these things mean, let’s describe
+them so that we’re on the same page.
+
+=== Provisioning
+
+NOTE: also known as *creating stuff*.
+
+Software needs computers and
+resources to run on. Ensuring there are enough computing resources available and creating them if not—is an important part of that. In fact, it’s not just
+machines or instances that we need; when deploying apps to the cloud, we may
+also need other physical or virtual infrastructure, such as:
+
+- Networks, also known as virtual private clouds (VPCs)
+- Network address translation (NAT) gateways
+- Routers
+- Firewalls
+- Internet gateways
+- Proxies
+- Security rules
+
+=== Configuration management
+Once our raw infrastructure has been created, it
+typically isn’t ready to perform its true purpose in life; it has to be configured.
+For some (possibly virtual) infrastructure, such as routers or firewalls, this
+means ensuring they have the right settings or rules applied. For a server, it
+typically means installing the necessary software packages and dependencies
+needed to run an application.
+
+=== Release management
+Most systems need regular maintenance or continued
+development, which implies an ongoing need to deploy—or release—newer
+versions. Typically, we’d like to be able to release easily, repeatedly at any time,
+and with minimal or no impact to users of the system. This can be achieved
+through automation, good tooling, and techniques such as blue-green deploys or
+canary releases. Additionally, when things go wrong, the ability to roll back to a
+known-good version of the software can be invaluable.
+
+=== Monitoring and alerting
+In a perfect world, our application, once deployed,
+would perform as expected forever. In reality, things go wrong: servers fail,
+software has bugs, our assumptions don’t hold true. Rather than bury our heads
+in the sand, we proactively take steps to know the health of our software and
+how well it’s functioning. This typically involves tracking health metrics for the
+system and being alerted when things start to go wrong.
+
+=== Operating
+In the day-to-day running of production systems, there are some
+common things we may need to do: scaling up to handle increased load, scaling
+down to save costs, diagnosing and debugging issues, and generally, keeping the
+lights on. Smart operations teams try to automate as much as possible to
+minimize human error and free up their time so they can be proactive rather than
+fighting fires.
+
+Adopting Docker changes the way we think about many of these areas.
+
+Take configuration management, for example. Although tools like Chef, Puppet,
+or Ansible are extremely popular, their role in a containerized world is
+considerably diminished. With Docker, each piece of software has its
+dependencies baked into its image, isolating it from those in another container.
+This dramatically simplifies the problem. Since app-level dependencies are
+managed by the app itself, in its Dockerfile , configuring your infrastructure
+instances is largely just a case of ensuring that Docker is installed.

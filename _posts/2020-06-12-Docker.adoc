@@ -36,6 +36,9 @@ release中的下载链接虽然是http://github.com开头,但会跳转到*.s3.am
 
 采用把**https**换成**http**的方式下载boot2docker.iso文件，下载完成后，放到C:\Users\用户\.docker\machine\cache目录下。然后再点击"Docker Quickstart Terminal"快捷方式。
 
+NOTE: 由于网络原因,访问国外的docker镜像很长慢,甚至下载失败,因此需要设置国内镜像。方法是在docker安装目录下的start.sh脚本文件中加入--engine-registry-mirror选项:
+    `"${DOCKER_MACHINE}" create --engine-registry-mirror=http://hub-mirror.c.163.com -d virtualbox $PROXY_ENV "${VM}"`
+
 == 执行
 
 在执行命令的时候,由于windows的路径问题,需要特别注意,另外在共享主机目录的时候,需要写绝对路径,如:
