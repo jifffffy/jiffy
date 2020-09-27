@@ -3,7 +3,7 @@
 :page-avatar: devlopr.png
 :page-image: coad-colors.png
 :page-category: guides
-:page-tags: [ isis, java ]
+:page-tags: [ isis java ]
 :page-excerpt: Apache Isis(TM) is a full-stack framework for building enterprise applications.
 [[getting-started]]
 = Getting started
