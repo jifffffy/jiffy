@@ -1,0 +1,490 @@
+:page-title: Apache isis getting started
+:page-author: Jiffy
+:page-avatar: devlopr.png
+:page-image: coad-colors.png
+:page-category: guides
+:page-tags: [ isis, java ]
+:page-excerpt: Apache Isis(TM) is a full-stack framework for building enterprise applications.
+[[getting-started]]
+= Getting started
+:toc:
+:imagesdir: ../assets/images/isis
+
+Apache Isis(TM) is a full-stack framework for building enterprise applications.
+It's also great for building the REST services for internet-scale apps, be they microservices or the backend of a mobile app.
+
+In this mini-book we'll learn about the framework through an example application that demonstrates both these main use cases (as an enterprise app and as a mobile backend).
+Along the way we'll take a few diversions to describe some of the background and philosophy of why the framework is as it is: as you'll see, it's quite opinionated!
+
+But for now, let's get on with the show.
+
+
+[[__getting-started_introducing-the-case-study]]
+== Introducing the Case Study
+
+In an effort to get a bit fitter I recently joined a gym, and I really enjoy attending their various classes (spinning and barbells, yeah!).
+One can book a class up to seven days in advance, and there's limited number of places for each class so they'll put you on the waiting list if it is already fun.
+But to book a class you need to phone up the gym; there's no website nor mobile app.
+So this is what gave me the idea for the case study we're going to use in this mini-book.
+
+xref:__getting-started_introducing-the-case-study_diagram[] shows a UML class diagram for the main entities that make up our domain.
+
+
+[#__getting-started_introducing-the-case-study_diagram,reftext='{figure-caption} {counter:refnum}.']
+.Case study
+image::ch01/class-diagram.png[width="500px",pdfwidth="60%", link="https://raw.githubusercontent.com/danhaywood/apache-isis-infoq-mini-book/master/src/docs/asciidoc/images/ch01/class-diagram.png"]
+
+
+We have 7 entities, in five different modules:
+
+* The `person` module holds the `Person` entity (for example "Billy" or "Tamsin") along with the abstract `PersonRole` entity
+
+* The `customers` module defines the `GymMember` entity; so a `Person` with this role - "Billy", say - is a gym member.
+
+* Similarly the `employees` module defines the `GymInstructor` entity so a `Person` with this role - "Tamsin", say - leads gym classes.
+
+* In the `timetable` module the `GymClassDescription` entity describes the types of classes available, such as "Pilates" or "Spinning".
+The `GymClass` lists which classes normally occur, such as "Pilates @ 5pm each Wednesday, led by Tamsin".
+
+* finally the `classes` module defines the `ScheduledGymClass` entity and also `Participant`.
+The former is an actual occurrance of a timetabled gym class, for example "Pilates on 1st March 2017, run by Bobbi".
+The latter is the `GymMember` who's actually going to participate in one of the ``GymClass``es.
+
+I've used link:https://en.wikipedia.org/wiki/Object_Modeling_in_Color[Coad Colors^] to indicate the nature of the various classes; I learnt this technique a long time ago and I still find it useful occasionally.
+xref:__getting-started_introducing-the-case-study_coad-colors[] shows the general direction of dependencies; following this simple rule helped me identify some missing concepts (for example `GymClassDescription` vs `GymClass`.
+
+[#__getting-started_introducing-the-case-study_coad-colors,reftext='{figure-caption} {counter:refnum}.']
+.Coad Colors
+image::ch01/coad-colors.png[width="800px", pdfwidth="100%", link="https://raw.githubusercontent.com/danhaywood/apache-isis-infoq-mini-book/master/src/docs/asciidoc/images/ch01/coad-colors.png"]
+
+
+In the diagram you'll see that there's one "loop" between classes: there are two routes from `ScheduledGymClass` to `GymInstructor`, either directly or by way of `GymClass`.
+Such loops are always worth looking at more closely to make sure that they make sense.
+In this case they do: sometimes the regular instructor who normally leads the class isn't available and so another substitutes in for a particular scheduled gym class.
+
+As for the modules themselves, there are _no_ loops between the modules.
+This will be useful: it means that we can implement each module as a Maven module, and then rely upon Maven itself to ensure that the application doesn't become a link:https://en.wikipedia.org/wiki/Big_ball_of_mud[big ball of mud^].
+If there were loops, then we could use the link:https://en.wikipedia.org/wiki/Dependency_inversion_principle[dependency inversion principle] to remove any cyclic dependencies.
+
+.Exploring the domain together
+****
+One of Apache Isis' strengths is in being able to tackle complex business domains, where neither the techies in the team nor even the busines experts start off with a complete understanding of the domain.
+Building an Apache Isis application is then a journey for the entire team, as insights and deeper concepts are uncovered along the way.
+
+I put together the above domain model by myself in an hour or so, and it's probably in good enough shape to begin the conversation with the domain experts.
+However, I'm certain that if we were building a gym class booking system "for real" then it would change substantially as the app was developed.  [***TODO - double-check that the model hasn't changed once I've finished the book!!!***]
+****
+
+
+[[__getting-started_introducing-the-case-study_case-study-repo]]
+=== The Case Study Repo
+
+To prevent this mini-book just being listing after listing, I'm not going to exhaustively spell out all the source code that makes up the application.
+Instead, I'll highlight the new concepts as they arise, and then I'll use tags in the link:https://github.com/danhaywood/gymclass[`danhaywood/gymclass`^] repo (up on github) that houses the source code.
+
+This means that you can (A) check out the code at any point, and (b) you can use github's link:https://github.com/danhaywood/gymclass/compare[/compare^] view to inspect the differences between any two tagss.
+
+Still, if you want to follow along, you will need to install some software.
+Next section looks at the prerequisites.
+
+[[__getting-started_prereqs]]
+== Prereqs
+
+Apache Isis is a Java framework, and we build with Maven.
+You'll therefore need to install:
+
+* link:http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html[JDK 8^]. +
++
+Actually, Apache Isis 1.x also supports Java 7, but some of the addons/customisations we'll be using require Java 8.
+
+* link:https://maven.apache.org/download.cgi[Maven 3.3.x^] or higher
+
+You'll also need an IDE.
+I was an link:https://www.eclipse.org/[Eclipse^](TM) user for over a decade, and still have fond memories of that IDE, but I switched to link:https://www.jetbrains.com/idea/download[IntelliJ^](TM) (community edition) a few years ago.
+
+You'll find setup instructions for both these IDEs on the link:http://isis.apache.org/guides/dg.html#_dg_ide[Apache Isis website^].
+If you're an link://http://netbeans.apache.org[Apache NetBeans^](TM) user then I'm sure you'll have no problems also; the main requirement is good Maven support.
+
+
+[[__getting-started_using-the-maven-archetype-to-generate-the-app]]
+== Using the maven archetype to generate the app [link:https://github.com/danhaywood/gymclass/tree/_1.1-as-generated-by-simpleapp-archetype[1.1^]]
+
+Apache Isis provides the link:http://isis.apache.org/guides/ugfun.html#_ugfun_getting-started_simpleapp-archetype["SimpleApp" Maven archetype^] to get you started.
+So that's what I'll use.
+
+In a suitable directory:
+
+[source,bash]
+----
+mvn archetype:generate  \
+    -D archetypeGroupId=org.apache.isis.archetype \
+    -D archetypeArtifactId=simpleapp-archetype \
+    -D archetypeVersion=1.14.0 \
+    -D groupId=com.danhaywood.apps \
+    -D artifactId=gymclass \
+    -D version=1.0-SNAPSHOT \
+    -B
+
+cd gymclass
+----
+
+which I then push to my link:https://github.com/danhaywood/gymclass[`danhaywood/gymclass`^] repo that I created on github:
+
+[source,bash]
+----
+git init
+git add .
+git commit -m "adds files generated by simpleapp archetype 1.14.0 ..."
+git remote add origin https://github.com/danhaywood/gymclass.git
+git push -u origin master
+----
+
+
+And I'll tag that immediately:
+
+[source,bash]
+----
+git tag _1.1-as-generated-by-simpleapp-archetype
+git push origin _1.1-as-generated-by-simpleapp-archetype
+----
+
+
+[[__getting-started_running-the-app]]
+== Running the app
+
+Even though we've not made any changes, you might want to try out the app at this point.
+To pull down the code at this point, use:
+
+[source,bash]
+----
+git checkout _1.1-as-generated-by-simpleapp-archetype
+----
+
+
+[TIP]
+====
+If you go to the github website you'll also be able to inspect the repo at this point by choosing the appropriate tag, as shown in xref:__getting-started_running-the-app_github-tag[].
+
+[#__getting-started_running-the-app_github-tag,reftext='{figure-caption} {counter:refnum}.']
+.Select tag from the github website
+image::ch01/github-tag.png[pdfwidth="30%",link="https://raw.githubusercontent.com/danhaywood/apache-isis-infoq-mini-book/master/src/docs/asciidoc/images/ch01/github-tag.png"]
+
+
+If you look at the "README" at this point you'll see that the maven archetype lists a whole bunch of ways to build the app and then run it.
+From the command line using `jetty:run` is probably most convenient, but you'll also see that you can even build and run the app as a Docker image!
+====
+
+Build and run the application using:
+
+[source,bash]
+----
+mvn clean install
+mvn -pl webapp jetty:run
+----
+
+Navigate to link:http://localhost:8080[localhost:8080^] to open up the index page, as shown in
+xref:__getting-started_running-the-app_index-page[].
+
+[#__getting-started_running-the-app_index-page,reftext='{figure-caption} {counter:refnum}.']
+.Index page for the app generated by simpleapp archetype
+image::ch01/simpleapp-index.png[pdfwidth="60%",link="https://raw.githubusercontent.com/danhaywood/apache-isis-infoq-mini-book/master/src/docs/asciidoc/images/ch01/simpleapp-index.png"]
+
+The index page for the app shows two links: "wicket/" and "swagger-ui/".
+Clicking on the "wicket/" link will take you to to a login page, where you can use `sven`/`pass` as a default user and password.
+
+From there you are at the home page and you can create, find and update ``SimpleObject``s, as shown in xref:__getting-started_running-the-app_simple-object[].
+
+[#__getting-started_running-the-app_simple-object,reftext='{figure-caption} {counter:refnum}.']
+.A "Simple object"
+image::ch01/simpleapp-object.png[pdfwidth="60%",link="https://raw.githubusercontent.com/danhaywood/apache-isis-infoq-mini-book/master/src/docs/asciidoc/images/ch01/simpleapp-object.png"]
+
+
+[[__getting-started_running-the-app_fixture-scripts]]
+=== Fixture Scripts
+
+By default the application is configured to run against an in-memory database (HSQLDB).
+That means that each time you run up the application, you'll have to start anew.
+
+Obviously, that would get pretty tiresome pretty quickly, so to save yourself some time you can run up a fixture, using `Prototyping > Run Fixture Script`.
+This will bring up an action prompt allowing you to select the fixture to run, as shown in xref:__getting-started_running-the-app_fixtures[].
+
+[#__getting-started_running-the-app_fixtures,reftext='{figure-caption} {counter:refnum}.']
+.Run fixtures to set up the app into a known state
+image::ch01/simpleapp-run-fixture-prompt.png[pdfwidth="60%",link="https://raw.githubusercontent.com/danhaywood/apache-isis-infoq-mini-book/master/src/docs/asciidoc/images/ch01/simpleapp-run-fixture-prompt.png"]
+
+Having a fixture script is a great way to define the context for exploring a particular user story/scenario.
+Later on [***TODO***] we'll see that fixtures are also used within Apache Isis' support for writing the integration tests for those user stories.
+
+
+[[__getting-started_taking-a-look-around]]
+== Taking a look around
+
+Before we start refactoring the application towards our case study's domain, let's quickly review the source code that the archetype generates for us.
+
+[TIP]
+====
+This is probably a good point to import the application into your IDE; see the Apache Isis link:http://isis.apache.org/guides/dg.html#_dg_ide[developers' guide^] for details.
+It also shows how to run the application from the IDE (rather that from the Maven command line).
+====
+
+[[__getting-started_taking-a-look-around_maven-modules]]
+=== Maven Modules
+
+The application is a multi-module Maven build, consisting of several modules:
+
+* `module-simple` +
++
+contains the domain object model for an initial "simple" module.
+It's in modules such as this that the main logic of the application resides.
+Module-specific tests (unit tests and integration tests) also reside here.
+
+* `application` +
++
+contains (an implementation of) the `AppManifest`, which basically describes the modules and configuration that makes up the running system.
+It also contains application-wide services and views (such as a home page/dashboard), and application-wide integration tests
+
+* `webapp` +
++
+contains the `web.xml` file and related classes to package up the application as a web app.
+
+There is a top-level parent module for all of these modules.
+
+
+[[__getting-started_taking-a-look-around_the-SimpleObject-entity]]
+=== The `SimpleObject` entity
+
+The `module-simple` module contains a single entity, `SimpleObject`.
+As you've probably realised, this doesn't represent anything in particular, it's just meant to be a minimal class that can be easily refactored into other classes that _are_ relevant to your domain.
+Indeed we'll see this shortly.
+
+Domain objects in Apache Isis have three different "types" of members:
+
+* properties - scalar values such as "name" or "date".
+They can also be a reference to another object.
+For example an `Order` might reference the `Customer` that placed it.
+
+* collections - multi-valued references to other objects.
+For example an `Order` might have a collection of ``OrderItem``s.
+
+* actions - business operations that can be performed by the domain object.
+Sometimes these are just queries, sometimes these modify state (either of the target domain object or indeed any other object).
+
+In the case of `SimpleObject` it defines two properties: `name` and `notes`:
+
+.SimpleObject properties
+----
+public class SimpleObject ... {
+    ...
+    @javax.jdo.annotations.Column(allowsNull = "false", length = 40)    // <1>
+    @Property()                                                         // <2>
+    @Getter @Setter                                                     // <3>
+    @Title(prepend = "Object: ")                                        // <4>
+    private String name;
+
+    @javax.jdo.annotations.Column(allowsNull = "true", length = 4000)   // <1>
+    @Property(editing = Editing.ENABLED)                                // <2>
+    @Getter @Setter                                                     // <3>
+    private String notes;
+    ...
+}
+----
+<1> JDO annotation provides persistence metadata to the ORM (more on this below)
+<2> The `@Property` annotation defines the field as an Apache Isis property.
+In the case of `name` the property cannot be edited through the UI, whereas for `notes` that property _can_ be directly edited.
+If empty (as it is for `name`) then the annotation isn't actually required; but it is recommended in all cases anyway, for readability.
+<3> The archetype uses link:https://projectlombok.org/[Project Lombok^] to remove some boilerplate: the `@Getter` and `@Setter` annotations will automatically generate corresponding getter and setter methods.
+When building with Maven, Project Lombok hooks into the compiler and __Just Works(TM)__.
+If using an IDE, you may need to enable the appropriate settings (see the link:http://isis.apache.org/guides/dg.html#_dg_ide[developers' guide^]).
+<4> The `@Title` annotation is used to provide a human-readable label to identify the domain object.
+This doesn't need to be unique, just "unique enough".
+
+As xref:__getting-started_running-the-app_simple-object[] showed, the framework automatically renders these properties in the UI.
+
+The `SimpleObject` entity doesn't have any collections, but it does define a couple of actions:
+
+.SimpleObject actions
+----
+public class SimpleObject ... {
+    ...
+    @Action(semantics = SemanticsOf.IDEMPOTENT)                         // <1>
+    public SimpleObject updateName(                                     // <2>
+            @Parameter(maxLength = 40)
+            @ParameterLayout(named = "Name")
+            final String name) {
+        setName(name);
+        return this;
+    }
+
+    @Action(semantics = SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE)        // <1>
+    public void delete() {                                              // <2>
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'%s' deleted", title));// <3>
+        repositoryService.remove(this);                                 // <4>
+    }
+    ...
+}
+----
+<1> The `@Action` annotation indicates that these public methods are treated as actions.
+<2> Must have `public` visibility.
+The object returned (if any) indicates what the framework should render next (often the same object)
+<3> Calls injected `TitleService` domain service (provided by the framework) to display a message (shown as a "toast" popup)
+<4> Calls injected `RepositoryService` domain service (provided by the framework) to actually delete this domain object from the database.
+
+Again in xref:__getting-started_running-the-app_simple-object[] you'll see that "changeName" and "delete" both appear as buttons in the UI.
+
+Actions are really, really important; ultimately they are what makes your application more than a simple link:https://en.wikipedia.org/wiki/Create,_read,_update_and_delete[CRUD^] app.
+It's quite common for actions to delegate to injected domain services, provided either by the framework (as is the case here) or by domain services defined by the application itself.
+We'll see an example of the latter in a moment.
+
+If you take a look at `SimpleObject` class definition you'll see a bunch of link:https://db.apache.org/jdo/[JDO^] annotations; these are used by the ORM (link:http://www.datanucleus.org[DataNucleus^]) to map the domain object to the database.
+JDO is admittedly less well known than JPA, but is just as capable (perhaps even more so); it's supported NoSQL as well as regular RDBMS from the very beginning.
+In fact, DataNucleus implements both the JDO and link:https://en.wikipedia.org/wiki/Java_Persistence_API[JPA^] APIs (though at the time of writing Apache Isis only supports entities annotated with JDO).
+The `SimpleObject` class definition is also annotated with the framework's own `@DomainObject` annotation.
+
+[[__getting-started_taking-a-look-around_layout-metadata]]
+=== Layout Metadata
+
+A good way to think about domain objects in Apache Isis are as regular pojos with additional metadata.
+This metadata is often expressed in terms of annotations, which pertain either to the domain layer (eg `@Property(editing = ...)` and `@Action#semantics=...)`, or which relate to mapping the domain object to the persistence layer (the JDO annotations such as `@PersistenceCapable` or `@Column`.
+In addition, metadata can be provided which relates to the presentation layer.
+
+This presentation metadata can also be provided using annotations; for example there are `@PropertyLayout`, `@CollectionLayout`, `@ActionLayout` and `@DomainObjectLayout` annotations that you can use.
+However it's more common and powerful to provide such metadata instead using an associated `.layout.xml` file; you can modify the file and recompile; the framework will then automatically re-render the domain object.
+(In fact, the archetype even provides some gradle files which can be used to do automatic reloading of the web browser for even faster feedback).
+
+Sitting alongside the `SimpleObject` class definition you'll therefore find the `SimpleObject.layout.xml` file.
+This uses `<property>`, `<collection>` and `<action>` elements to reference the corresponding members of the domain object, these are organized using `<row>`, `<col>`, `<tabGroup>`, `<tab>` and `<fieldset>`.
+The organization of columns and rows is modelled directly after link:http://getbootstrap.com/[Bootstrap3^], so should be easy to learn (there are always 12 ``<col>``s per `<row>`, for example).
+
+Earlier on I mentioned that every domain object has a title which is used as a label for the end-user to distinguish objects.
+Alongside the title the app also renders an icon, as further hint as to the type of object they is being displayed.
+The icon used also sits alongside the `SimpleObject`, namely `SimpleObject.png`.
+It can be quite good fun selecting an appropriate icon (I tend to use link:www.icons8.com[Icons8^].
+
+[[__getting-started_taking-a-look-around_domain-services]]
+=== Domain services
+
+So much for the `SimpleObject` entity.
+The framework also generates a couple of domain services: `SimpleObjectRepository` and `SimpleObjectMenu`.
+These are (in this case) singletons that are instantiated automatically by the framework and injected everywhere they are required - into other domain services, into entities, whatever.
+
+The `SimpleObjectRepository` is an implementation of the link:https://martinfowler.com/eaaCatalog/repository.html[Repository^] pattern; it in turn delegates to the framework's own more generic `RepositoryService` that is a facade over the ORM's JDO API:
+
+[source,java]
+----
+@DomainService(                                                         // <1>
+         nature = NatureOfService.DOMAIN, ...                           // <2>
+)
+public class SimpleObjectRepository {
+    ...
+    public List<SimpleObject> listAll() { ... }
+    public List<SimpleObject> findByName(final String name) { ... }
+    public SimpleObject create(final String name) { ... }
+    ...
+}
+----
+<1> Used by the framework to discover the services (on the classpath), and provides additional semantics about the domain service.
+<2> Indicates that the service is _not_ to be rendered in the UI, it is intended to be called programmatically by domain objects only
+
+It's quite common to also have repository services double up as factories, hence the service also defines a "create" method here too
+
+The `SimpleObjectMenu` domain service is, at first glance, quite similar to the `SimpleObjectRepository`; it also defines the same three actions.
+However, the menu will be rendered in the UI, by virtue of the `@DomainService(nature=NatureOfService.VIEW_MENU_ONLY)` annotation.
+The supporting `@DomainServiceLayout` defines the label to use.
+
+Although the archetype defines `SimpleObjectMenu` and `SimpleObjectRepository` as being very similar, in a real-world app you may well want to organize your application menus completely differently to the way in which the repository services are defined.
+Having two services provides for this separation of concerns, letting them evolve independently of each other.
+
+[[__getting-started_taking-a-look-around_tests-and-fixtures]]
+=== Tests and fixtures
+
+Finally, the archetype provides a whole bunch of tests and fixtures.
+We'll end up refactoring some of this stuff and just deleting other stuff that we don't need.
+Let's not get distracted by those classes for now.
+
+.What's missing?
+****
+You may have noticed that there was no discussion of `SimpleObjectController` or `SimpleObject.jsp` views.
+That's because there aren't any!
+Apache Isis _is_ a model-view-controller framework, however as the developer you only write the model - the domain objects - while the view and controller are entirely generics, provided by the framework itself.
+To be fair, the `.layout.xml` is a view of sorts, but also it is optional: the framework will render the domain object even without this file.
+
+Hopefully it is obvious that not having to write this UI layer has big benefits when it comes to productivity.
+It also forces the developer and domain expert to focus on the stuff that really matters: the underlying domain.
+
+And here's another benefit: since the developer doesn't (ie can't) write the presentation layer code, it means that business logic doesn't leak into the presentation layer: the framework in a sense puts up a "firewall" between the presentation and domain layers, thereby ensuring a proper separation of concerns.
+
+There's a name for this style of architecture: the link:https://en.wikipedia.org/wiki/Naked_objects[naked objects^] pattern.
+You can learn more about the philosophy and implications of the pattern in the link:http://downloads.nakedobjects.net/resources/Pawson%20thesis.pdf[PhD thesis] of Richard Pawson (who named and popularized the pattern).
+Fun fact: the external examiner for Richard's thesis was link:https://en.wikipedia.org/wiki/Trygve_Reenskaug[Trygve Reenskaug^], who formulated the link:https://heim.ifi.uio.no/~trygver/2003/javazone-jaoo/MVC_pattern.pdf[MVC^] pattern.
+****
+
+
+
+== Refactor [link:https://github.com/danhaywood/gymclass/tree/_1.2-simple-module-refactored-to-person-module[1.2^]]
+
+As we surveyed xref:__getting-started_taking-a-look-around[above], the archetype gives us a single module called `simple`, with a single domain class called `SimpleObject`.
+As it happens, the structure of that entity is quite similar to the `Person` entity that we need in the `persons` module, so I decided to just do a little refactoring:
+
+* renamed `module-simple` directory to `module-persons`
+* renamed `<artifactId>gymclass-module-classes</artifactId>` to `<artifactId>gymclass-module-persons</artifactId>` and adjusted module references
+* using the IDE, renamed `domainapp.modules.timetable` to package `domainapp.modules.persons`
+* fixed up the fully-qualified class name in the JDOQL query fpr `SimpleObject` (the IDE incorrectly changed this string, but running the tests flagged the issue)
+* renamed some classes called `SimpleModuleXxx` to `PersonModuleXxx` (we'll learn about how Apache Isis defines modules later on [***TODO - fix ref***]).
+
+Without thinking too hard about it, I then renamed the `SimpleObject` entity, along with associated tests/fixtures created by the archetype:
+
+* renamed `SimpleObject`, `SimpleObjectTest`, `SimpleObjectData`, `SimpleObjectMenu`, `SimpleObjectMenuGlue`, `SimpleObjectRepository` to corresponding `Person...` classes
+* fixed the JDOQL for `Person`; there's also a delete statement in `PersonModuleTearDown` (one of our fixture scripts) that needs attention
+* changed the DB schema for `Person` from "simple" to "persons"
+* updated `persistence.xml` (used by the ORM that Apache Isis' uses, link://www.datanucleus.org[DataNucleus^]) to specify "gymclass-persons" as the name of this persistence unit
+
+Also some cosmetics:
+
+* each domain class rendered by the framework optionally has a `.layout.xml` file which provides layout hints to describe the positioning of the properties, collections and actions that make up each domain object.
+So I renamed `SimpleObject.layout.xml` to `Person.layout.xml` file
+
+* also, each domain class can have an icon.
+I deleted `SimpleObject.png` and replaced it with a suitable icon downloaded from link:http://icons8.com[icons8^] website
+* renamed `PersonMenu`'s name to "Persons" (from "Simple Objects").
+
+And finally there were some application-level changes:
+
+* I searched for "SimpleApp" and "Simple App", and renamed to "GymClass"
+* I fixed some BDD (cucumber) feature files and bindings +
++
+A little bit of care is needed here because if these fail, then they don't break the build, instead the cucumber report (`application/target/cucumber-reports/overview-features.html`) shows up as incomplete.
+We'll look at BDD in a later chapter [***TODO***].
+
+You can check this version of the app out using:
+
+[source,bash]
+----
+git checkout _1.2-simple-module-refactored-to-person-module
+----
+
+
+For the meantime, xref:__getting-started_placeholders_home-page[] shows the app as it currently stands.
+
+[#__getting-started_placeholders_home-page,reftext='{figure-caption} {counter:refnum}.']
+.Index page for the app generated by simpleapp archetype
+image::ch01/gymclass-with-person-module.png[pdfwidth="60%",link="https://raw.githubusercontent.com/danhaywood/apache-isis-infoq-mini-book/master/src/docs/asciidoc/images/ch01/gymclass-with-person-module.png"]
+
+
+
+
+
+Use of superclass vs subclass layouts.
+
+
+
+
+
+== What we've learnt
+
+In this chapter we've seen how to use Apache Isis' maven archetype to bootstrap the development of a new application, and what the classes and files that are generated.
+We learnt how to load that app into an IDE, and how to run the app either from the IDE or from the Maven command line.
+
+We've also introduced our case study, and did some some refactoring of our initial code to move it into that general direction.
+
+In the next chapter we'll [***TODO - update once written***].

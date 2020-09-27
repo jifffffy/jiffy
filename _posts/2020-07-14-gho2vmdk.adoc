@@ -19,5 +19,7 @@ To change the file, run ghost with the following command line:
 
 examples:
 ----
+
 G:\>ghost32.exe -clone,mode=restore,src=G:\my_file.GHO,dst=G:\my_file.vmdk -batch -sure
+
 ----
