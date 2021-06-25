@@ -1,4 +1,4 @@
-:page-title: How to change a Ghost ".gho" image file to a ".VMDK" file for use in VMWare
+:page-title: How to change a Ghost gho image file to a MDK file for use in VMWare
 :page-author: Jiffy
 :page-avatar: devlopr.png
 :page-image: zoom.jpg
@@ -12,14 +12,11 @@ You can change a .gho file to a .VMDK file using the DOS version of the ghost.ex
 To change the file, run ghost with the following command line:
 
 ----
-
 -clone,mode=restore,src=<path\file>.gho,dst=<path\file>.vmdk -sure
-
 ----
 
 examples:
+
 ----
-
 G:\>ghost32.exe -clone,mode=restore,src=G:\my_file.GHO,dst=G:\my_file.vmdk -batch -sure
-
 ----
