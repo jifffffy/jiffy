@@ -1,16 +1,16 @@
-:page-title: Unzip zip rar
+:page-title: ArchivG
 :page-author: Jiffy
 :page-avatar: devlopr.png
 :page-image: archivg.png
-:page-category: guides
-:page-tags: [ gho vmdk ]
-:page-excerpt: Unzip zip files
+:page-category: tool
+:page-tags: [ groovy ]
+:page-excerpt: 一键解压缩rar、7z、zip
 
 === ArchivG
 
-image::archivg.png
+image::/assets/images/archivg.png
 
-这个工具使用http://sevenzipjbind.sourceforge.net/extraction_snippets.html[Seven Zip Jbind]解压缩常用格式压缩文件
-https://sunyuyangg555.github.io/download/ArchivG-1.0-SNAPSHOT-all.jar[Download]
+这个工具使用link:http://sevenzipjbind.sourceforge.net/extraction_snippets.html[7-Zip-JBinding]解压缩常用格式压缩文件,可以点此
+link:https://sunyuyangg555.github.io/download/ArchivG-1.0-SNAPSHOT-all.jar[下载]
 
 
